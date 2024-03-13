@@ -1,4 +1,3 @@
-import 'package:ekra/signup.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,9 +55,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class SignUp extends StatelessWidget {
+  const SignUp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SignUp(),
     );

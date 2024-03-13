@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -44,7 +45,7 @@ class SignUp extends StatelessWidget {
                             onPressed: () {
                               // Handle Google sign-in
                             },
-                            icon: const Icon(Icons.google),
+                            icon: const Icon(FontAwesome.google),
                             label: const Text('Google'),
                           ),
                         ),
