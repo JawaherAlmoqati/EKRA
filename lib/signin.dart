@@ -12,59 +12,6 @@ class SignUp extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Welcome Back',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    'Sign in with',
-                    style: TextStyle(
-                      fontSize: 18.0,
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: const BoxDecoration(
-                            border: Border(
-                              right: BorderSide(),
-                              left: BorderSide(),
-                            ),
-                          ),
-                          child: TextButton.icon(
-                            onPressed: () {
-                              // Handle Google sign-in
-                            },
-                            icon: const Icon(FontAwesome.google),
-                            label: const Text('Google'),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextButton.icon(
-                          onPressed: () {
-                            // Handle Apple sign-in
-                          },
-                          icon: const Icon(Icons.apple),
-                          label: const Text('Apple'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -82,42 +29,43 @@ class SignUp extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16.0),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      // Handle sign-in button
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.black),
-                    ),
-                    child: const Text('Sign In'),
-                  ),
-                ),
-                const SizedBox(width: 16.0),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      // Handle register button
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.grey),
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    child: const Text('Register'),
-                  ),
-                ),
-              ],
+            const Text(
+              'Welcome',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Back',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () {
+                // Handle sign-in button
+              },
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                minimumSize: MaterialStateProperty.all<Size>(
+                    const Size(double.infinity, 48.0)),
+              ),
+              child: const Text('Sign In'),
+            ),
+            const SizedBox(height: 8.0),
+            TextButton(
+              onPressed: () {
+                // Handle register button
+              },
+              child: const Text('Register'),
             ),
             const SizedBox(height: 16.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 TextButton(
                   onPressed: () {
@@ -130,7 +78,47 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                 ),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: false,
+                      onChanged: (bool? value) {
+                        // Handle checkbox state change
+                      },
+                    ),
+                    const Text('Remind me'),
+                  ],
+                ),
               ],
+            ),
+            const SizedBox(height: 16.0),
+            const Text(
+              'Or Sign up with',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8.0),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      // Handle Google sign-in
+                    },
+                    icon: const Icon(FontAwesome.google),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      // Handle Apple sign-in
+                    },
+                    icon: const Icon(Icons.apple),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 16.0),
             const TextField(
@@ -152,6 +140,17 @@ class SignUp extends StatelessWidget {
                 ),
               ),
               obscureText: true,
+            ),
+            const SizedBox(height: 16.0),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: const Text(
+                'Or Sign up with',
+                textAlign: TextAlign.center,
+              ),
             ),
           ],
         ),
