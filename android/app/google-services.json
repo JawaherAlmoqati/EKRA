@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "905229138938",
+    "project_id": "edda-1d0d8",
+    "storage_bucket": "edda-1d0d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905229138938:android:0c8cd37f53da355a1c8243",
+        "android_client_info": {
+          "package_name": "com.example.ekra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApI5SS0mAhkawYKyRB9Te-xGC5pCBV9A0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
