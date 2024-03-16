@@ -1,3 +1,4 @@
+import 'package:ekra/main.dart';
 import 'package:ekra/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -263,4 +264,10 @@ class _RegisterState extends State<Register> {
       ),
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: SignUp(),
+  ));
 }

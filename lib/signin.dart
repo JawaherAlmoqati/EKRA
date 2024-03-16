@@ -313,3 +313,9 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
+void main() {
+  runApp(const MaterialApp(
+    home: SignIn(),
+  ));
+}
