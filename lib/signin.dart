@@ -1,7 +1,6 @@
 import 'package:ekra/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:sign_in_up/register.dart';
 import 'package:sizer/sizer.dart';
 
 class SignIn extends StatefulWidget {
