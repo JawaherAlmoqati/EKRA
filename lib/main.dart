@@ -1,5 +1,5 @@
-import 'package:ekra/app.dart';
-import 'package:ekra/signin.dart';
+//import 'package:ekra/app.dart';
+import 'package:ekra/features/Authentication/screens/login/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';

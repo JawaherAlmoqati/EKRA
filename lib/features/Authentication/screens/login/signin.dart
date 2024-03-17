@@ -1,19 +1,20 @@
-import 'package:ekra/main.dart';
-import 'package:ekra/signin.dart';
+import 'package:ekra/features/Authentication/screens/signup/signup.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _RegisterState extends State<Register> {
-  bool isSignInActive = false;
+class _SignInState extends State<SignIn> {
+  bool isSignInActive = true;
   bool _isObscure = true;
+  bool _remeberMe = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class _RegisterState extends State<Register> {
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
-                            Get.offAll(() => const SignIn());
+                            isSignInActive = true;
                           });
                         },
                         child: Container(
@@ -99,7 +100,12 @@ class _RegisterState extends State<Register> {
                     ),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          setState(() {
+                            isSignInActive = false;
+                            Get.to(() => const Register());
+                          });
+                        },
                         child: Container(
                           height: 5.h,
                           margin: EdgeInsets.only(right: 2.w),
@@ -129,32 +135,6 @@ class _RegisterState extends State<Register> {
               right: 10.w,
               child: TextField(
                 decoration: InputDecoration(
-                  hintText: 'Full Name',
-                  hintStyle: const TextStyle(color: Colors.black),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                style: const TextStyle(color: Colors.black),
-              ),
-            ),
-            Positioned(
-              top: 47.h,
-              left: 10.w,
-              right: 10.w,
-              child: TextField(
-                decoration: InputDecoration(
                   hintText: 'Email',
                   hintStyle: const TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
@@ -176,33 +156,7 @@ class _RegisterState extends State<Register> {
               ),
             ),
             Positioned(
-              top: 56.h,
-              left: 10.w,
-              right: 10.w,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: 'Phone Number',
-                  hintStyle: const TextStyle(color: Colors.black),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(color: Colors.white, width: 0),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                style: const TextStyle(color: Colors.black),
-              ),
-            ),
-            Positioned(
-              top: 65.h,
+              top: 47.h,
               left: 10.w,
               right: 10.w,
               child: TextField(
@@ -240,27 +194,138 @@ class _RegisterState extends State<Register> {
               ),
             ),
             Positioned(
-              top: 75.h,
+                top: 54.h,
+                left: 10.w,
+                right: 10.w,
+                child: Row(
+                  children: [
+                    Checkbox(
+                        value: _remeberMe,
+                        onChanged: (value) {
+                          setState(() {
+                            _remeberMe = value!;
+                          });
+                        }),
+                    const Text(
+                      'Remember Me',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                            Colors.grey), // Change color as needed
+                      ),
+                      child: const Text("Forget Password?"),
+                    )
+                  ],
+                )),
+            Positioned(
+              top: 64.h,
               left: 10.w,
               right: 10.w,
-              child: Container(
-                height: 8.h,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: const Color(0xffFDBF61),
-                    borderRadius: BorderRadius.circular(10)),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Add your sign-in logic here
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffFDBF61), // Background color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10), // Rounded corners
+                  ),
+                  minimumSize: Size(double.infinity, 6.h), // Set button height
+                ),
                 child: Text(
-                  "Continue",
+                  "Sign In",
                   style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold),
+                    color: Colors.black,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
+            Positioned(
+                top: 74.h,
+                left: 10.w,
+                right: 10.w,
+                child: const Row(
+                  children: [
+                    Expanded(
+                        child: Divider(
+                      color: Colors.black,
+                      thickness: 1,
+                    )),
+                    Text(
+                      "  Or Sign In with  ",
+                      style: TextStyle(color: Colors.black26),
+                    ),
+                    Expanded(
+                        child: Divider(
+                      color: Colors.black,
+                      thickness: 1,
+                    )),
+                  ],
+                )),
+            Positioned(
+                top: 77.h,
+                left: 10.w,
+                right: 10.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: 30.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image.asset("assets/images/google.png"),
+                          Text(
+                            "Google",
+                            style: TextStyle(
+                                fontSize: 14.sp, color: Colors.black26),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      height: 8.h,
+                      width: 30.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Image.asset("assets/images/apple.png"),
+                          Text(
+                            "Apple",
+                            style: TextStyle(
+                                fontSize: 14.sp, color: Colors.black26),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ))
           ],
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(const MaterialApp(
+    home: SignIn(),
+  ));
 }
