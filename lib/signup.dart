@@ -264,9 +264,3 @@ class _RegisterState extends State<Register> {
     );
   }
 }
-
-void main() {
-  runApp(const MaterialApp(
-    home: SignUp(),
-  ));
-}
