@@ -1,5 +1,5 @@
 import 'package:ekra/features/Authentication/screens/signup/signup.dart';
-
+import 'package:ekra/homebar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -41,15 +41,22 @@ class _SignInState extends State<SignIn> {
               child: Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
             ),
             Positioned(
-                right: 5.w,
-                top: 6.h,
+              right: 5.w,
+              top: 6.h,
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => const Homebar());
+                },
                 child: Text(
                   "Skip",
                   style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400),
-                )),
+                    fontSize: 12.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
             Positioned(
                 left: 10.w,
                 top: 15.h,
