@@ -1,8 +1,17 @@
+import 'package:ekra/features/shop/screens/home/widgets/CategoriesList.dart';
+import 'package:ekra/features/shop/screens/home/widgets/appbar.dart';
+import 'package:ekra/features/shop/screens/home/widgets/hsearchbar.dart';
 import 'package:flutter/material.dart';
 
-class HomeeScreen extends StatelessWidget {
+class HomeeScreen extends StatefulWidget {
   const HomeeScreen({super.key});
 
+  @override
+  State<HomeeScreen> createState() => _HomeeScreenState();
+}
+
+class _HomeeScreenState extends State<HomeeScreen> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,32 +26,36 @@ class HomeeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                padding: const EdgeInsets.only(top: 55, left: 40),
-                child: GestureDetector(
-                  onTap: () {
-                    // Handle tap event here
-                    // Navigate to another place or perform any action
-                  },
-                  child: const Row(
-                    children: [
-                      Icon(
-                        Icons.location_on,
-                        color: Color(0xFFE74C3C),
-                        size: 24,
+              //appbar
+              const Happbar(),
+              const SizedBox(height: 20),
+              const HsearchBar(),
+              const SizedBox(height: 25),
+
+              const Padding(
+                padding: EdgeInsets.only(left: 30),
+                child: Row(
+                  children: [
+                    Text(
+                      "Categories",
+                      style: TextStyle(
+                        fontSize: 24,
+                        // ignore: use_full_hex_values_for_flutter_colors
+                        color: Color(0xff81d1d21),
+                        fontWeight: FontWeight.bold,
                       ),
-                      SizedBox(width: 3), // Adding some space
-                      Text(
-                        "Buraydah",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Color(0xFF333333),
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              )
+              ),
+              //const SizedBox(height: 8),
+              CategoriesList(
+                  selectedIndex: selectedIndex,
+                  onTap: (index) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  })
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class addproductScreen extends StatelessWidget {
   const addproductScreen({super.key});
   @override
