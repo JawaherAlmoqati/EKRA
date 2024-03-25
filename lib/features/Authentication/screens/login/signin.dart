@@ -1,7 +1,10 @@
 import 'package:ekra/features/Authentication/screens/signup/signup.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+
 import 'package:sizer/sizer.dart';
 
 class SignIn extends StatefulWidget {
@@ -15,6 +18,28 @@ class _SignInState extends State<SignIn> {
   bool isSignInActive = true;
   bool _isObscure = true;
   bool _remeberMe = false;
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String _errorMessage = '';
+
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email.text,
+        password: pass.text,
+      );
+      // Navigate to your home screen or next screen
+      print('User: ${userCredential.user}');
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+      });
+      print('Error: $_errorMessage');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +128,7 @@ class _SignInState extends State<SignIn> {
                         onTap: () {
                           setState(() {
                             isSignInActive = false;
-                            Get.to(() => const Register());
+                            Get.to(() => const SignUp());
                           });
                         },
                         child: Container(
@@ -134,6 +159,7 @@ class _SignInState extends State<SignIn> {
               left: 10.w,
               right: 10.w,
               child: TextField(
+                controller: email,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   hintStyle: const TextStyle(color: Colors.black),
@@ -160,6 +186,7 @@ class _SignInState extends State<SignIn> {
               left: 10.w,
               right: 10.w,
               child: TextField(
+                controller: pass,
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -208,16 +235,12 @@ class _SignInState extends State<SignIn> {
                         }),
                     const Text(
                       'Remember Me',
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.black12),
                     ),
                     const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            Colors.grey), // Change color as needed
-                      ),
-                      child: const Text("Forget Password?"),
+                    const Text(
+                      "Forget Password?",
+                      style: TextStyle(color: Colors.black26),
                     )
                   ],
                 )),
@@ -225,23 +248,22 @@ class _SignInState extends State<SignIn> {
               top: 64.h,
               left: 10.w,
               right: 10.w,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add your sign-in logic here
+              child: GestureDetector(
+                onTap: () {
+                  _signInWithEmailAndPassword();
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xffFDBF61), // Background color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
-                  minimumSize: Size(double.infinity, 6.h), // Set button height
-                ),
-                child: Text(
-                  "Sign In",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+                child: Container(
+                  height: 8.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: const Color(0xffFDBF61),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -275,44 +297,103 @@ class _SignInState extends State<SignIn> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: 30.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset("assets/images/google.png"),
-                          Text(
-                            "Google",
-                            style: TextStyle(
-                                fontSize: 14.sp, color: Colors.black26),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () async {
+                        final FirebaseAuth _auth = FirebaseAuth.instance;
+                        final GoogleSignIn _googleSignIn = GoogleSignIn();
+                        // Trigger the authentication flow
+                        final GoogleSignInAccount? googleUser =
+                            await _googleSignIn.signIn();
+
+                        // Obtain the auth details from the request
+                        final GoogleSignInAuthentication googleAuth =
+                            await googleUser!.authentication;
+
+                        // Create a new credential
+                        final OAuthCredential credential =
+                            GoogleAuthProvider.credential(
+                          accessToken: googleAuth.accessToken,
+                          idToken: googleAuth.idToken,
+                        );
+
+                        // Sign in to Firebase with the credential
+                        final UserCredential userCredential =
+                            await _auth.signInWithCredential(credential);
+                        print(userCredential);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 8.h,
+                        width: 30.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image.asset("assets/images/google.png"),
+                            Text(
+                              "Google",
+                              style: TextStyle(
+                                  fontSize: 14.sp, color: Colors.black26),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 8.h,
-                      width: 30.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Image.asset("assets/images/apple.png"),
-                          Text(
-                            "Apple",
-                            style: TextStyle(
-                                fontSize: 14.sp, color: Colors.black26),
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () async {
+                        final FirebaseAuth _auth = FirebaseAuth.instance;
+                        // Create an `AuthorizationCredentialAppleID` instance
+                        final AuthorizationCredentialAppleID appleCredential =
+                            await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
+                          ],
+                          webAuthenticationOptions: WebAuthenticationOptions(
+                            clientId: 'your_client_id',
+                            redirectUri:
+                                Uri.parse('https://your-redirect-uri.com'),
+                          ),
+                        );
+
+                        // Create a new `OAuthProvider` credential
+                        final OAuthProvider oAuthProvider =
+                            OAuthProvider('apple.com');
+
+                        // Create `AuthCredential` using the `AuthorizationCredentialAppleID`
+                        final AuthCredential credential =
+                            oAuthProvider.credential(
+                          idToken: appleCredential.identityToken,
+                          accessToken: appleCredential.authorizationCode,
+                        );
+
+                        // Sign in to Firebase with the credential
+                        final UserCredential userCredential =
+                            await _auth.signInWithCredential(credential);
+                        print(userCredential);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 8.h,
+                        width: 30.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Image.asset("assets/images/apple.png"),
+                            Text(
+                              "Apple",
+                              style: TextStyle(
+                                  fontSize: 14.sp, color: Colors.black26),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -322,10 +403,4 @@ class _SignInState extends State<SignIn> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: SignIn(),
-  ));
 }

@@ -1,18 +1,41 @@
-import 'package:ekra/features/Authentication/screens/login/signin.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class Register extends StatefulWidget {
-  const Register({super.key});
+import '../login/signin.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
 
   @override
-  State<Register> createState() => _RegisterState();
+  State<SignUp> createState() => _RegisterState();
 }
 
-class _RegisterState extends State<Register> {
+class _RegisterState extends State<SignUp> {
   bool isSignInActive = false;
   bool _isObscure = true;
+  TextEditingController email = TextEditingController();
+  TextEditingController pass = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _errorMessage = '';
+
+  Future<void> _signUpWithEmailAndPassword() async {
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: email.text,
+        password: pass.text,
+      );
+      // Navigate to your home screen or next screen
+      print('User: ${userCredential.user}');
+    } catch (e) {
+      setState(() {
+        _errorMessage = e.toString();
+      });
+      print('Error: $_errorMessage');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -242,23 +265,20 @@ class _RegisterState extends State<Register> {
               top: 75.h,
               left: 10.w,
               right: 10.w,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Add your sign-in logic here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xffFDBF61), // Background color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // Rounded corners
-                  ),
-                  minimumSize: Size(double.infinity, 6.h), // Set button height
-                ),
-                child: Text(
-                  "Continue",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.bold,
+              child: GestureDetector(
+                onTap: _signUpWithEmailAndPassword,
+                child: Container(
+                  height: 8.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: const Color(0xffFDBF61),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
