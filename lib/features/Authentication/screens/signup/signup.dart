@@ -75,7 +75,7 @@ class _RegisterState extends State<SignUp> {
                 left: 10.w,
                 top: 15.h,
                 child: Text(
-                  "Welcome\nBack",
+                  "Welcome",
                   style: TextStyle(
                       fontSize: 16.sp,
                       color: Colors.black,
