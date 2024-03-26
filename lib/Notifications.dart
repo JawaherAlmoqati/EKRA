@@ -42,15 +42,15 @@ class NotificationPage extends StatelessWidget {
             image: AssetImage("assets/images/notifi.png"),
             fit: BoxFit.cover,
           )),
-          child: Column(children: [
-            Align(
-              alignment: Alignment.center,
-              child: const Text(
-                "My Notification",
+          child: ListView(
+            padding: EdgeInsets.all(24),
+            children: [
+              Text(
+                "My Notifications",
                 style: TextStyle(fontSize: 29),
               ),
-            ),
-          ])),
+            ],
+          )),
     );
   }
 }
