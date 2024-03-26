@@ -1,6 +1,7 @@
 import 'package:ekra/features/shop/screens/home/widgets/CategoriesList.dart';
 import 'package:ekra/features/shop/screens/home/widgets/appbar.dart';
 import 'package:ekra/features/shop/screens/home/widgets/hsearchbar.dart';
+import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
 import 'package:flutter/material.dart';
 
 class HomeeScreen extends StatefulWidget {
@@ -49,13 +50,29 @@ class _HomeeScreenState extends State<HomeeScreen> {
                 ),
               ),
               //const SizedBox(height: 8),
+
               CategoriesList(
                   selectedIndex: selectedIndex,
                   onTap: (index) {
                     setState(() {
                       selectedIndex = index;
                     });
-                  })
+                  }),
+              GridView.builder(
+                itemCount: 4,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                //scrollDirection: Axis.horizontal,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  mainAxisExtent: 293,
+                ),
+                itemBuilder: (_, index) => const ProductCard(),
+              )
+
+              //const ProductCard(),
             ],
           ),
         ),
