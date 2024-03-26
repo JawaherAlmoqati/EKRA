@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 void main() {
   runApp(const MyLoca());
@@ -44,7 +43,7 @@ class LocationPage extends StatelessWidget {
           )),
           child: ListView(
             padding: EdgeInsets.all(24),
-            children: [
+            children: const [
               Text(
                 "City",
                 style: TextStyle(fontSize: 29),
