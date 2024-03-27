@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
+
 class splash_screen extends StatelessWidget {
   const splash_screen({super.key});
 
@@ -15,7 +16,7 @@ class splash_screen extends StatelessWidget {
             splash: const CircleAvatar(
               radius: 300, 
                 backgroundImage: AssetImage("assets/images/eddalogo.png"),)
-            ,nextScreen: const MyHomePage(title: 'edda',),
+            ,nextScreen: const MyApp(title: 'edda',),
         );
 
     
