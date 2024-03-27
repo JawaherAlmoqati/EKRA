@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Sizer',
           theme: ThemeData.light(),
-          home: const SignIn(),
+          home: const splash_screen(),
         );
       },
     );

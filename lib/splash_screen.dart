@@ -1,3 +1,4 @@
+import 'package:ekra/features/Authentication/screens/login/signin.dart';
 import 'package:ekra/main.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
@@ -16,7 +17,7 @@ class splash_screen extends StatelessWidget {
             splash: const CircleAvatar(
               radius: 300, 
                 backgroundImage: AssetImage("assets/images/eddalogo.png"),)
-            ,nextScreen: const MyApp(title: 'edda',),
+            ,nextScreen: const SignIn(),
         );
 
     

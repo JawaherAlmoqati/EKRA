@@ -74,6 +74,19 @@ flutter:
   assets:
     - assets/images/background.png
     - assets/images/eddalogo.png
+    - assets/images/all.png
+    - assets/images/apple.png
+    - assets/images/background.png
+    - assets/images/blue.png
+    - assets/images/Bulldozer.png
+    - assets/images/Compactor.png
+    - assets/images/Concrete mixer.png
+    - assets/images/Edda.png
+    - assets/images/Excavator.png
+    - assets/images/google.png
+    - assets/images/power-drill 1.png
+    - assets/images/yellow.png
+
     
 
 
