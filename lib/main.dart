@@ -1,9 +1,28 @@
+<<<<<<< HEAD
 import 'package:ekra/splash_screen.dart';
+=======
+//import 'package:ekra/app.dart';
+import 'package:ekra/features/Authentication/screens/login/signin.dart';
+>>>>>>> 42591e99fc1064fa1b530d682644e7001131a0ab
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:sizer/sizer.dart';
+import 'firebase_options.dart';
 
+<<<<<<< HEAD
 
 void main() {
   runApp(const MyApp(title: 'edda',));
+=======
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+>>>>>>> 42591e99fc1064fa1b530d682644e7001131a0ab
 }
 
 class MyApp extends StatelessWidget {
@@ -12,6 +31,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -123,6 +143,17 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+=======
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Sizer',
+          theme: ThemeData.light(),
+          home: const SignIn(),
+        );
+      },
+>>>>>>> 42591e99fc1064fa1b530d682644e7001131a0ab
     );
   }
 }
