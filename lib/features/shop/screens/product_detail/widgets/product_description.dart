@@ -50,47 +50,6 @@ class _ProductDescriptionState extends State<ProductDescription> {
           isSelected[0] ? const OverviewContent() : const ReviewsContent(),
           const SizedBox(height: 10),
           const SizedBox(height: 40),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: const Color(0xffFEBD59),
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.favorite_border),
-                  color: Colors.white,
-                  onPressed: () {
-                    // Handle like button tap
-                  },
-                ),
-              ),
-              SizedBox(
-                width: 229,
-                height: 52,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFFFEBD59)),
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFF333333)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                    ),
-                  ),
-                  onPressed: () {
-                    // Handle check availability
-                  },
-                  child: const Text('check for available'),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );
