@@ -1,6 +1,8 @@
 import 'package:ekra/common/widgets/custom_shapes/rounded_container.dart';
-import 'package:ekra/common/widgets/images/RoundedImage.dart';
+import 'package:ekra/common/widgets/images/rounded_image.dart';
+import 'package:ekra/features/shop/screens/product_detail/product_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key});
@@ -8,7 +10,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetail()),
       child: Container(
         width: 216,
         height: 293,
@@ -42,12 +44,12 @@ class ProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            // SizedBox(height: 8),
+
             //details
             Padding(
               padding: EdgeInsets.only(left: 4),
               child: Column(
-                //  mainAxisAlignment: MainAxisAlignment.start,
+                //mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -78,12 +80,12 @@ class ProductCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 30),
 
                   Row(
                     children: [
                       Text(
-                        "\$170 SAR/day",
+                        "170 SAR/day",
                         style: TextStyle(
                           color: Color(0xffFEBD59),
                           fontSize: 18,

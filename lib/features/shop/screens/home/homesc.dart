@@ -34,7 +34,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
               const SizedBox(height: 25),
 
               const Padding(
-                padding: EdgeInsets.only(left: 30),
+                padding: EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
                     Text(
@@ -58,8 +58,36 @@ class _HomeeScreenState extends State<HomeeScreen> {
                       selectedIndex = index;
                     });
                   }),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    const Text(
+                      "Popular choices",
+                      style: TextStyle(
+                        fontSize: 24,
+                        // ignore: use_full_hex_values_for_flutter_colors
+                        color: Color(0xff81d1d21),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 140),
+                    GestureDetector(
+                      onTap: () {},
+                      child: const Text(
+                        "View all",
+                        style: TextStyle(
+                          color: Color(0xff6A6B6C),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+
               GridView.builder(
-                itemCount: 4,
+                itemCount: 2,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 //scrollDirection: Axis.horizontal,
@@ -71,8 +99,6 @@ class _HomeeScreenState extends State<HomeeScreen> {
                 ),
                 itemBuilder: (_, index) => const ProductCard(),
               )
-
-              //const ProductCard(),
             ],
           ),
         ),
