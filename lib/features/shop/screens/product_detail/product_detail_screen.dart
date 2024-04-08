@@ -1,3 +1,4 @@
+import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/price_container.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_description.dart';
@@ -5,7 +6,9 @@ import 'package:ekra/features/shop/screens/product_detail/widgets/product_detail
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_image.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+  const ProductDetail({super.key, required this.item});
+
+  final ProductModel item;
 
   @override
   State<ProductDetail> createState() => _ProductDetail();

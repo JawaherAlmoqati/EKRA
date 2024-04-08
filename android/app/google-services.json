@@ -7,42 +7,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:905229138938:android:103f20b558baf0ff1c8243",
-        "android_client_info": {
-          "package_name": "com.example.ekr"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "905229138938-qgv7nrs0u44uuh0oa1o8h84dn7geuivg.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyApI5SS0mAhkawYKyRB9Te-xGC5pCBV9A0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "905229138938-qgv7nrs0u44uuh0oa1o8h84dn7geuivg.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "905229138938-mrsilkt67t9f3jiashalbnvrno6hhhkr.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.ekra"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:905229138938:android:0c8cd37f53da355a1c8243",
         "android_client_info": {
           "package_name": "com.example.ekra"

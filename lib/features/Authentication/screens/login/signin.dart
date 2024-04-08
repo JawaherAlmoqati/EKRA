@@ -308,11 +308,11 @@ class _SignInState extends State<SignIn> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        final FirebaseAuth _auth = FirebaseAuth.instance;
-                        final GoogleSignIn _googleSignIn = GoogleSignIn();
+                        final FirebaseAuth auth = FirebaseAuth.instance;
+                        final GoogleSignIn googleSignIn = GoogleSignIn();
                         // Trigger the authentication flow
                         final GoogleSignInAccount? googleUser =
-                            await _googleSignIn.signIn();
+                            await googleSignIn.signIn();
 
                         // Obtain the auth details from the request
                         final GoogleSignInAuthentication googleAuth =
@@ -327,7 +327,7 @@ class _SignInState extends State<SignIn> {
 
                         // Sign in to Firebase with the credential
                         final UserCredential userCredential =
-                            await _auth.signInWithCredential(credential);
+                            await auth.signInWithCredential(credential);
                         print(userCredential);
                       },
                       child: Container(
@@ -353,7 +353,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        final FirebaseAuth _auth = FirebaseAuth.instance;
+                        final FirebaseAuth auth = FirebaseAuth.instance;
                         // Create an `AuthorizationCredentialAppleID` instance
                         final AuthorizationCredentialAppleID appleCredential =
                             await SignInWithApple.getAppleIDCredential(
@@ -381,7 +381,7 @@ class _SignInState extends State<SignIn> {
 
                         // Sign in to Firebase with the credential
                         final UserCredential userCredential =
-                            await _auth.signInWithCredential(credential);
+                            await auth.signInWithCredential(credential);
                         print(userCredential);
                       },
                       child: Container(

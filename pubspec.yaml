@@ -54,6 +54,10 @@ dependencies:
   google_sign_in: ^6.2.1
   sign_in_with_apple: ^6.0.0
   page_transition: ^2.1.0
+  cloud_firestore: ^4.16.0
+  iconsax: ^0.0.8
+  cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,10 @@
+import 'package:ekra/features/shop/controllers/product_controller.dart';
 import 'package:ekra/features/shop/screens/home/widgets/CategoriesList.dart';
 import 'package:ekra/features/shop/screens/home/widgets/appbar.dart';
 import 'package:ekra/features/shop/screens/home/widgets/hsearchbar.dart';
 import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeeScreen extends StatefulWidget {
   const HomeeScreen({super.key});
@@ -13,8 +15,17 @@ class HomeeScreen extends StatefulWidget {
 
 class _HomeeScreenState extends State<HomeeScreen> {
   int selectedIndex = 0;
+  late ProductController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        Get.put(ProductController()); // Initialize your controller here
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = Get.find<ProductController>();
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -86,19 +97,36 @@ class _HomeeScreenState extends State<HomeeScreen> {
                 ),
               ),
 
-              GridView.builder(
-                itemCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                //scrollDirection: Axis.horizontal,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  mainAxisExtent: 293,
-                ),
-                itemBuilder: (_, index) => const ProductCard(),
-              )
+              Obx(() {
+                // Here, you check if the products are still loading
+                if (controller.isLoading.value) {
+                  // Assuming you have an isLoading RxBool in your controller
+                  return  const Center(child: CircularProgressIndicator());
+                }
+
+                // If there are no products and loading is complete
+                if (controller.featuredProducts.isEmpty) {
+                  return Center(
+                      child: Text('No Data Found!',
+                          style: Theme.of(context).textTheme.bodyMedium));
+                } else {
+                  // Else, render the GridView with products
+                  return GridView.builder(
+                    itemCount: controller.featuredProducts.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                      mainAxisExtent: 293,
+                    ),
+                    itemBuilder: (_, index) =>
+                        ProductCard(item: controller.featuredProducts[index]),
+                  );
+                }
+              }),
             ],
           ),
         ),
