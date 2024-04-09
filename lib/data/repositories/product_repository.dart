@@ -1,8 +1,8 @@
-import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:ekra/utils/exceptions/firebase_exception.dart';
 import 'package:ekra/utils/exceptions/platform_exception.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ProductRepository extends GetxController {
@@ -12,14 +12,8 @@ class ProductRepository extends GetxController {
 
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
-      final snapshot = await _db
-          .collection('item')
-          .where('IsFeatured', isEqualTo: true)
-          .limit(2)
-          .get();
-      return snapshot.docs
-          .map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot))
-          .toList();
+      final snapshot = await _db.collection('item').where('isFeatured', isEqualTo: true).limit(2).get();
+      return snapshot.docs.map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot)).toList();
     } on FirebaseException catch (e) {
       throw TFirebaseException(e.code).message;
     } on PlatformException catch (e) {

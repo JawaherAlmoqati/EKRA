@@ -22,8 +22,7 @@ class _RegisterState extends State<SignUp> {
 
   Future<void> _signUpWithEmailAndPassword() async {
     try {
-      UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
         email: email.text,
         password: pass.text,
       );
@@ -66,20 +65,14 @@ class _RegisterState extends State<SignUp> {
                 top: 6.h,
                 child: Text(
                   "Skip",
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: 12.sp, color: Colors.black, fontWeight: FontWeight.w400),
                 )),
             Positioned(
                 left: 10.w,
                 top: 15.h,
                 child: Text(
                   "Welcome",
-                  style: TextStyle(
-                      fontSize: 16.sp,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16.sp, color: Colors.black, fontWeight: FontWeight.bold),
                 )),
             Positioned(
               top: 30.h,
@@ -87,9 +80,7 @@ class _RegisterState extends State<SignUp> {
               child: Container(
                 height: 6.h,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    color: const Color(0xffE2E2E0),
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                 width: 80.w,
                 child: Row(
                   children: [
@@ -103,11 +94,7 @@ class _RegisterState extends State<SignUp> {
                         child: Container(
                           margin: EdgeInsets.only(left: 2.w),
                           height: 5.h,
-                          decoration: BoxDecoration(
-                              color: isSignInActive
-                                  ? Colors.white
-                                  : const Color(0xffE2E2E0),
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                           child: const Center(
                             child: Text(
                               'Sign In',
@@ -125,11 +112,7 @@ class _RegisterState extends State<SignUp> {
                         child: Container(
                           height: 5.h,
                           margin: EdgeInsets.only(right: 2.w),
-                          decoration: BoxDecoration(
-                              color: !isSignInActive
-                                  ? Colors.white
-                                  : const Color(0xffE2E2E0),
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: !isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                           child: const Center(
                             child: Text(
                               'Register',
@@ -176,6 +159,7 @@ class _RegisterState extends State<SignUp> {
               left: 10.w,
               right: 10.w,
               child: TextField(
+                controller: email,
                 decoration: InputDecoration(
                   hintText: 'Email',
                   hintStyle: const TextStyle(color: Colors.black),
@@ -228,6 +212,7 @@ class _RegisterState extends State<SignUp> {
               left: 10.w,
               right: 10.w,
               child: TextField(
+                controller: pass,
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   hintText: 'Password',
@@ -270,15 +255,10 @@ class _RegisterState extends State<SignUp> {
                 child: Container(
                   height: 8.h,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffFDBF61),
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: const Color(0xffFDBF61), borderRadius: BorderRadius.circular(10)),
                   child: Text(
                     "Continue",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

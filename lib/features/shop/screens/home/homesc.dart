@@ -19,8 +19,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
   @override
   void initState() {
     super.initState();
-    controller =
-        Get.put(ProductController()); // Initialize your controller here
+    controller = Get.put(ProductController()); // Initialize your controller here
   }
 
   @override
@@ -71,7 +70,10 @@ class _HomeeScreenState extends State<HomeeScreen> {
                   }),
 
               Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 16,
+                ),
                 child: Row(
                   children: [
                     const Text(
@@ -83,7 +85,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 140),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () {},
                       child: const Text(
@@ -101,29 +103,25 @@ class _HomeeScreenState extends State<HomeeScreen> {
                 // Here, you check if the products are still loading
                 if (controller.isLoading.value) {
                   // Assuming you have an isLoading RxBool in your controller
-                  return  const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 // If there are no products and loading is complete
                 if (controller.featuredProducts.isEmpty) {
-                  return Center(
-                      child: Text('No Data Found!',
-                          style: Theme.of(context).textTheme.bodyMedium));
+                  return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
                 } else {
                   // Else, render the GridView with products
                   return GridView.builder(
                     itemCount: controller.featuredProducts.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                       mainAxisExtent: 293,
                     ),
-                    itemBuilder: (_, index) =>
-                        ProductCard(item: controller.featuredProducts[index]),
+                    itemBuilder: (_, index) => ProductCard(item: controller.featuredProducts[index]),
                   );
                 }
               }),

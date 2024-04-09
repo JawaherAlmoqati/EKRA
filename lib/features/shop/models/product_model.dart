@@ -21,13 +21,7 @@ class ProductModel {
     this.isFeatured,
   });
 
-  static ProductModel empty() => ProductModel(
-      id: "",
-      name: "",
-      price: 0.0,
-      image: "",
-      monthlyRate: 0.0,
-      weeklyRate: 0.0);
+  static ProductModel empty() => ProductModel(id: "", name: "", price: 0.0, image: "", monthlyRate: 0.0, weeklyRate: 0.0);
 
   /// Json Format
 
@@ -46,18 +40,17 @@ class ProductModel {
 
   /// Map Json oriented document snapshot from Firebase to Model
 
-  factory ProductModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
+  factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) return ProductModel.empty();
     final data = document.data()!;
     return ProductModel(
       id: document.id,
       name: data['name'] ?? '',
-      price: (data['price'] ?? 0.0).toDouble(),
+      price: data['price'] != null ? double.tryParse((data['price']!.toString())) ?? 0 : 0,
       image: data['image'] ?? '',
       description: data['description'],
-      monthlyRate: (data['monthlyRate'] ?? 0.0).toDouble(),
-      weeklyRate: (data['weeklyRate'] ?? 0.0).toDouble(),
+      monthlyRate: data['monthlyRate'] != null ? double.tryParse(data['monthlyRate'].toString()) ?? 0 : 0,
+      weeklyRate: data['weeklyRate'] != null ? double.tryParse(data['weeklyRate'].toString()) ?? 0 : 0,
       isFeatured: data['isFeatured'] ?? false,
     );
   }
