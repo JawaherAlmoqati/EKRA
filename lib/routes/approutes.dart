@@ -12,7 +12,7 @@ class AppRoutes {
     GetPage(name: TRoutes.homebar, page: () => const Homebar()),
     GetPage(name: TRoutes.home, page: () => const HomeeScreen()),
     GetPage(name: TRoutes.favourite, page: () => const FavouriteScreen()),
-    GetPage(name: TRoutes.myrental, page: () => const MyrentalScreen()),
+    GetPage(name: TRoutes.myrental, page: () => const MyRentalSc()),
     GetPage(name: TRoutes.account, page: () => const AccountScreen()),
     GetPage(name: TRoutes.addproduct, page: () => const addproductScreen()),
   ];
