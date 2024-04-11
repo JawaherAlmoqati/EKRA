@@ -1,9 +1,11 @@
+//import 'package:ekra/features/shop/controllers/product_controller.dart';
+import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDescription extends StatefulWidget {
-  const ProductDescription({
-    super.key,
-  });
+  const ProductDescription({super.key, required this.item});
+
+  final ProductModel item;
 
   @override
   State<ProductDescription> createState() => _ProductDescriptionState();
@@ -13,6 +15,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
   List<bool> isSelected = [true, false];
   @override
   Widget build(BuildContext context) {
+    // final controller = ProductController.instance;
     return Padding(
       padding: const EdgeInsets.only(
         left: 12,
@@ -47,7 +50,9 @@ class _ProductDescriptionState extends State<ProductDescription> {
               ),
             ],
           ),
-          isSelected[0] ? const OverviewContent() : const ReviewsContent(),
+          isSelected[0]
+              ? OverviewContent(item: widget.item)
+              : const ReviewsContent(),
           const SizedBox(height: 10),
           const SizedBox(height: 40),
         ],
@@ -57,19 +62,21 @@ class _ProductDescriptionState extends State<ProductDescription> {
 }
 
 class OverviewContent extends StatelessWidget {
-  const OverviewContent({super.key});
+  const OverviewContent({super.key, required this.item});
+  final ProductModel item;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    //final controller = ProductController.instance;
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Our tractors are precision-crafted, durable, and engineered with top-grade materials and advanced technology, offering unmatched reliability and performance for various projects and tasks.',
-              style: TextStyle(
+              item.description ?? 'No description available',
+              style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
               ),

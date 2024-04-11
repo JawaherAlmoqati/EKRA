@@ -5,16 +5,11 @@ import 'package:ekra/features/shop/screens/product_detail/widgets/product_descri
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_details.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_image.dart';
 
-class ProductDetail extends StatefulWidget {
+class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key, required this.item});
 
   final ProductModel item;
 
-  @override
-  State<ProductDetail> createState() => _ProductDetail();
-}
-
-class _ProductDetail extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,16 +24,16 @@ class _ProductDetail extends State<ProductDetail> {
                 colors: [Color(0xFFE7E6E1), Color(0xFFFAFAFA)],
               ),
             ),
-            child: const SingleChildScrollView(
-              padding: EdgeInsets.only(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.only(
                   bottom: 200), // Adjust padding to avoid overlap
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ProductImage(),
-                  ProductDetails(),
-                  PriceContainer(),
-                  ProductDescription(),
+                  ProductImage(item: item),
+                  ProductDetails(item: item),
+                  PriceContainer(item: item),
+                  ProductDescription(item: item),
                 ],
               ),
             ),

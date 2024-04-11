@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RoundedContainer(
-              //  height: 180,
+              height: 180,
               width: 216,
               padding: EdgeInsets.zero,
               backgroundColor: Colors.white,
@@ -43,7 +43,7 @@ class ProductCard extends StatelessWidget {
                     imageUrl: item.image,
                     applyImageRadius: false,
                     isNetworkImage: true,
-                    // height: 199,
+                    //height: 180,
                   ),
                 ],
               ),
@@ -63,7 +63,7 @@ class ProductCard extends StatelessWidget {
                         fontSize: 20,
                         fontWeight: FontWeight.w600),
                     overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                    maxLines: 1,
                     textAlign: TextAlign.left,
                   ),
                   //SizedBox(height: 4),
@@ -89,20 +89,20 @@ class ProductCard extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        item.price.toString(),
+                        '${item.price.toStringAsFixed(0)}SAR',
                         style: const TextStyle(
                           color: Color(0xffFEBD59),
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(width: 20),
+                      const SizedBox(width: 70),
                       const Icon(
                         Icons.star,
                         color: Color(0xffFEBD59),
                       ),
                       const Text(
-                        "4.3",
+                        "0.0",
                         style: TextStyle(
                           color: Color(0xff5A5A5A),
                           fontSize: 16,

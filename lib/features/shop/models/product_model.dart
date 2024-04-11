@@ -9,6 +9,7 @@ class ProductModel {
   double weeklyRate;
   double monthlyRate;
   bool? isFeatured;
+  List<String>? images;
 
   ProductModel({
     required this.id,
@@ -19,9 +20,16 @@ class ProductModel {
     required this.monthlyRate,
     required this.weeklyRate,
     this.isFeatured,
+    this.images,
   });
 
-  static ProductModel empty() => ProductModel(id: "", name: "", price: 0.0, image: "", monthlyRate: 0.0, weeklyRate: 0.0);
+  static ProductModel empty() => ProductModel(
+      id: "",
+      name: "",
+      price: 0.0,
+      image: "",
+      monthlyRate: 0.0,
+      weeklyRate: 0.0);
 
   /// Json Format
 
@@ -35,23 +43,32 @@ class ProductModel {
       'monthlyRate': monthlyRate,
       'weeklyRate': weeklyRate,
       'isFeatured': isFeatured,
+      'Images': images ?? [],
     };
   }
 
   /// Map Json oriented document snapshot from Firebase to Model
 
-  factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory ProductModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() == null) return ProductModel.empty();
     final data = document.data()!;
     return ProductModel(
       id: document.id,
       name: data['name'] ?? '',
-      price: data['price'] != null ? double.tryParse((data['price']!.toString())) ?? 0 : 0,
+      price: data['price'] != null
+          ? double.tryParse((data['price']!.toString())) ?? 0
+          : 0,
       image: data['image'] ?? '',
       description: data['description'],
-      monthlyRate: data['monthlyRate'] != null ? double.tryParse(data['monthlyRate'].toString()) ?? 0 : 0,
-      weeklyRate: data['weeklyRate'] != null ? double.tryParse(data['weeklyRate'].toString()) ?? 0 : 0,
+      monthlyRate: data['monthlyRate'] != null
+          ? double.tryParse(data['monthlyRate'].toString()) ?? 0
+          : 0,
+      weeklyRate: data['weeklyRate'] != null
+          ? double.tryParse(data['weeklyRate'].toString()) ?? 0
+          : 0,
       isFeatured: data['isFeatured'] ?? false,
+      images: data['Images'] != null ? List<String>.from(data['Images']) : [],
     );
   }
 }

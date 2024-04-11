@@ -1,10 +1,15 @@
+//import 'package:ekra/features/shop/controllers/product_controller.dart';
+import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class PriceContainer extends StatelessWidget {
-  const PriceContainer({super.key});
+  const PriceContainer({super.key, required this.item});
+
+  final ProductModel item;
 
   @override
   Widget build(BuildContext context) {
+    //final controller = ProductController.instance;
     return Container(
       margin:
           const EdgeInsets.symmetric(vertical: 10), // Adjust spacing as needed
@@ -17,11 +22,16 @@ class PriceContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          const PriceItem(amount: '640 SAR', period: 'a day'),
+          PriceItem(
+              amount: '${item.price.toStringAsFixed(0)} SAR', period: 'a day'),
           verticalDivider(),
-          const PriceItem(amount: '3,200 SAR', period: 'a week'),
+          PriceItem(
+              amount: '${item.weeklyRate.toStringAsFixed(0)} SAR',
+              period: 'a week'),
           verticalDivider(),
-          const PriceItem(amount: '14,000 SAR', period: 'a month'),
+          PriceItem(
+              amount: '${item.monthlyRate.toStringAsFixed(0)} SAR',
+              period: 'a month'),
         ],
       ),
     );

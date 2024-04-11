@@ -1,24 +1,37 @@
 import 'package:ekra/common/widgets/images/rounded_image.dart';
+import 'package:ekra/features/shop/controllers/images_controller.dart';
+import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({
     super.key,
+    required this.item,
   });
+
+  final ProductModel item;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ImagesController());
+    final images = controller.getAllProductImages(item);
     return Stack(
       children: [
-        const SizedBox(
+        SizedBox(
             height: 400,
             child: Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Center(
-                child: RoundedImage(
+                child: Obx(() {
+                  final image = controller.selectedItemImage.value;
+                  return RoundedImage(
+                    //height: 500,
                     applyImageRadius: true,
-                    imageUrl: "assets/images/Compactorpic.jpg"),
+                    imageUrl: image,
+                    isNetworkImage: true,
+                  );
+                }),
               ),
             )),
         Positioned(
