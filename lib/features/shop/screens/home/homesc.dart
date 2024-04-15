@@ -5,7 +5,8 @@ import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
 import 'package:flutter/material.dart';
 
 class HomeeScreen extends StatefulWidget {
-  const HomeeScreen({super.key});
+  const HomeeScreen({Key? key}) : super(key: key); 
+    static List<String> PreviousSearchs = [];
 
   @override
   State<HomeeScreen> createState() => _HomeeScreenState();
@@ -15,6 +16,7 @@ class _HomeeScreenState extends State<HomeeScreen> {
   int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
