@@ -1,22 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyNoti());
-}
-
-class MyNoti extends StatelessWidget {
-  const MyNoti({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
-      home: NotificationPage(),
-    );
-  }
-}
+import 'package:get/get.dart';
 
 class NotificationPage extends StatelessWidget {
   const NotificationPage({super.key});
@@ -27,8 +10,10 @@ class NotificationPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -42,11 +27,13 @@ class NotificationPage extends StatelessWidget {
             fit: BoxFit.cover,
           )),
           child: ListView(
-            padding: EdgeInsets.all(24),
-            children: [
-              Text(
-                "My Notifications",
-                style: TextStyle(fontSize: 29),
+            padding: const EdgeInsets.all(24),
+            children: const [
+              Center(
+                child: Text(
+                  "My Notifications",
+                  style: TextStyle(fontSize: 29),
+                ),
               ),
             ],
           )),

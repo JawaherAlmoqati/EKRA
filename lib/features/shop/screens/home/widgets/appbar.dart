@@ -1,4 +1,7 @@
+import 'package:ekra/features/shop/screens/home/Notifications.dart';
+import 'package:ekra/features/shop/screens/home/location.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Happbar extends StatelessWidget {
   const Happbar({
@@ -13,6 +16,7 @@ class Happbar extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
+              Get.to(() => const LocationPage());
               // Handle tap event
             },
             child: const Row(
@@ -38,6 +42,7 @@ class Happbar extends StatelessWidget {
           const Spacer(),
           IconButton(
             onPressed: () {
+              Get.to(() => const NotificationPage());
               // Handle icon button tap event here
             },
             icon: const Icon(

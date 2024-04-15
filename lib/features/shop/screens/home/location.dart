@@ -1,22 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyLoca());
-}
-
-class MyLoca extends StatelessWidget {
-  const MyLoca({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(useMaterial3: true),
-      home: LocationPage(),
-    );
-  }
-}
+import 'package:get/get.dart';
 
 class LocationPage extends StatelessWidget {
   const LocationPage({super.key});
@@ -27,8 +10,10 @@ class LocationPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -42,7 +27,7 @@ class LocationPage extends StatelessWidget {
             fit: BoxFit.cover,
           )),
           child: ListView(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             children: const [
               Text(
                 "City",
