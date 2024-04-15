@@ -1,3 +1,4 @@
+import 'package:ekra/features/shop/screens/home/widgets/Search_screen.dart';
 import 'package:flutter/material.dart';
 
 class HsearchBar extends StatelessWidget {
@@ -11,8 +12,15 @@ class HsearchBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: GestureDetector(
         onTap: () {
-          // Navigate to another page here
+            // Navigate to another page here
           // Example: Get.to(FavouriteScreen());
+          //go to Search page
+             Navigator.push(
+                 context, 
+                    MaterialPageRoute(
+                       builder: (context)=>SearchScreen()),
+                       );
+           
         },
         child: Container(
           padding: const EdgeInsets.all(16),

@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeeScreen extends StatefulWidget {
-  const HomeeScreen({super.key});
+  const HomeeScreen({Key? key}) : super(key: key); 
+    static List<String> PreviousSearchs = [];
 
   @override
   State<HomeeScreen> createState() => _HomeeScreenState();
@@ -25,7 +26,11 @@ class _HomeeScreenState extends State<HomeeScreen> {
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     final controller = Get.find<ProductController>();
+=======
+    
+>>>>>>> 9ac799c64f9fca5be26d89bd4bcd67172c69caad
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
