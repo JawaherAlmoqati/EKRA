@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeeScreen extends StatefulWidget {
-  const HomeeScreen({Key? key}) : super(key: key); 
-    static List<String> PreviousSearchs = [];
+  const HomeeScreen({super.key});
+  static List<String> PreviousSearchs = [];
 
   @override
   State<HomeeScreen> createState() => _HomeeScreenState();
@@ -20,17 +20,12 @@ class _HomeeScreenState extends State<HomeeScreen> {
   @override
   void initState() {
     super.initState();
-    controller =
-        Get.put(ProductController()); // Initialize your controller here
+    controller = Get.put(ProductController()); // Initialize your controller here
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     final controller = Get.find<ProductController>();
-=======
-    
->>>>>>> 9ac799c64f9fca5be26d89bd4bcd67172c69caad
     return Container(
       decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -114,24 +109,27 @@ class _HomeeScreenState extends State<HomeeScreen> {
 
                 // If there are no products and loading is complete
                 if (controller.featuredProducts.isEmpty) {
-                  return Center(
-                      child: Text('No Data Found!',
-                          style: Theme.of(context).textTheme.bodyMedium));
+                  return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
                 } else {
                   // Else, render the GridView with products
                   return GridView.builder(
                     itemCount: controller.featuredProducts.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 16,
+                    ),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16,
                       crossAxisSpacing: 16,
                       mainAxisExtent: 293,
                     ),
-                    itemBuilder: (_, index) =>
-                        ProductCard(item: controller.featuredProducts[index]),
+                    itemBuilder: (_, index) => ProductCard(
+                      item: controller.featuredProducts[index],
+                    ),
                   );
                 }
               }),

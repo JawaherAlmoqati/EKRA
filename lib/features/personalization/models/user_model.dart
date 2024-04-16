@@ -27,10 +27,10 @@ class UserModel {
   Map<String, dynamic> toJson() {
     return {
       'fullName': fullName,
-      'Email': email,
-      'PhoneNumber': phoneNumber,
-      'ProfilePicture': profilePicture,
-      'Bio': bio
+      'email': email,
+      'phone': phoneNumber,
+      'profilePicture': profilePicture,
+      'bio': bio
     };
   }
 
@@ -42,13 +42,24 @@ class UserModel {
       return UserModel(
         id: document.id,
         fullName: data['fullName'] ?? '',
-        email: data['Email'] ?? '',
-        phoneNumber: data['PhoneNumber'] ?? '',
-        profilePicture: data['ProfilePicture'] ?? '',
-        bio: data['Bio'] ?? '',
+        email: data['email'] ?? '',
+        phoneNumber: data['phone'] ?? '',
+        profilePicture: data['profilePicture'] ?? '',
+        bio: data['bio'] ?? '',
       );
     } else {
       return UserModel.empty();
     }
+  }
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      fullName: json['fullName'],
+      email: json['email'],
+      phoneNumber: json['phoneNumber'],
+      profilePicture: json['profilePicture'],
+      bio: json['bio'],
+    );
   }
 }
