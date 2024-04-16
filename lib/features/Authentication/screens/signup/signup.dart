@@ -184,8 +184,8 @@ class _RegisterState extends State<SignUp> {
                           authBloc.add(SignUpEvent(
                             email: email.text,
                             password: pass.text,
-                            fullName: email.text,
-                            phoneNumber: email.text,
+                            fullName: fullName.text,
+                            phoneNumber: phoneNumber.text,
                           ));
                         }
                       },
