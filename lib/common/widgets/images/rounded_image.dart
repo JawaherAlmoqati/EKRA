@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekra/common/widgets/shimmers/shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class RoundedImage extends StatelessWidget {
   const RoundedImage({
@@ -38,22 +38,24 @@ class RoundedImage extends StatelessWidget {
         height: height,
         padding: padding,
         decoration: BoxDecoration(
-            border: border,
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius)),
+          border: border,
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(borderRadius),
+        ),
         child: ClipRRect(
-          borderRadius: applyImageRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
+          borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
           child: isNetworkImage
               ? CachedNetworkImage(
                   fit: fit,
                   imageUrl: imageUrl,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      TShimmerEffect(
-                          width: width ?? double.infinity,
-                          height: height ?? 158),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  progressIndicatorBuilder: (context, url, downloadProgress) => TShimmerEffect(
+                    width: width ?? double.infinity,
+                    height: height ?? 158,
+                    radius: applyImageRadius ? borderRadius : 0,
+                  ),
+                  errorWidget: (context, url, error) => const Center(
+                    child: Icon(Icons.error),
+                  ),
                 )
               : Image(
                   fit: fit,

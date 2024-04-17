@@ -17,3 +17,12 @@ final class AddProductEvent extends ProductEvent {
   @override
   List<Object> get props => [product];
 }
+
+final class GetProductOfSpecificUser extends ProductEvent {
+  final String userId;
+
+  const GetProductOfSpecificUser({required this.userId});
+
+  @override
+  List<Object> get props => [userId];
+}

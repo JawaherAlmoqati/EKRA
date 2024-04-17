@@ -15,7 +15,7 @@ class _ProductDescriptionState extends State<ProductDescription> {
   List<bool> isSelected = [true, false];
   @override
   Widget build(BuildContext context) {
-    // final controller = ProductController.instance;
+    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(
         left: 12,
@@ -27,12 +27,10 @@ class _ProductDescriptionState extends State<ProductDescription> {
           ToggleButtons(
             selectedColor: const Color(0xffFEBD59),
             fillColor: const Color(0xFFFAFAFA),
-            constraints: const BoxConstraints(minHeight: 30, minWidth: 190),
+            constraints: BoxConstraints(minHeight: 30, minWidth: width / 2.2, maxWidth: width),
             onPressed: (int index) {
               setState(() {
-                for (int buttonIndex = 0;
-                    buttonIndex < isSelected.length;
-                    buttonIndex++) {
+                for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
                   isSelected[buttonIndex] = false;
                 }
                 isSelected[index] = true;
@@ -50,11 +48,8 @@ class _ProductDescriptionState extends State<ProductDescription> {
               ),
             ],
           ),
-          isSelected[0]
-              ? OverviewContent(item: widget.item)
-              : const ReviewsContent(),
+          isSelected[0] ? OverviewContent(item: widget.item) : const ReviewsContent(),
           const SizedBox(height: 10),
-          const SizedBox(height: 40),
         ],
       ),
     );

@@ -9,21 +9,21 @@ class HsearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: GestureDetector(
         onTap: () {
-            // Navigate to another page here
+          // Navigate to another page here
           // Example: Get.to(FavouriteScreen());
           //go to Search page
-             Navigator.push(
-                 context, 
-                    MaterialPageRoute(
-                       builder: (context)=>SearchScreen()),
-                       );
-           
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SearchScreen(),
+            ),
+          );
         },
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(25),

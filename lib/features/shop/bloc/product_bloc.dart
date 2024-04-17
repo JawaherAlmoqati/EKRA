@@ -30,5 +30,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
         emit(AddProductFailure(errorMessage: e.toString()));
       }
     });
+    on<GetProductOfSpecificUser>((event, emit) async {
+      emit(GetProductOfSpecificUserInProgress());
+      try {
+        final snapshot = await FirebaseFirestore.instance.collection('products').where('userId', isEqualTo: event.userId).get();
+        final products = snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+        emit(GetProductOfSpecificUserSuccess(products: products));
+      } catch (e) {
+        emit(GetProductOfSpecificUserFailure(errorMessage: e.toString()));
+      }
+    });
   }
 }

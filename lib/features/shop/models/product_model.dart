@@ -14,7 +14,7 @@ class ProductModel {
   String? availableDate;
 
   UserModel? user;
-  
+  String? userId;
 
   ProductModel({
     required this.id,
@@ -28,6 +28,7 @@ class ProductModel {
     this.images,
     this.user,
     this.availableDate,
+    this.userId,
   });
 
   static ProductModel empty() => ProductModel(
@@ -39,6 +40,7 @@ class ProductModel {
         weeklyRate: 0.0,
         user: null,
         availableDate: '',
+        userId: '',
       );
 
   /// Json Format
@@ -55,6 +57,7 @@ class ProductModel {
       'Images': images,
       'user': user!.toJson(),
       'availableDate': availableDate ?? '',
+      'userId': userId,
     };
   }
 
@@ -75,6 +78,7 @@ class ProductModel {
       images: data['Images'] != null ? List<String>.from(data['Images']) : [],
       user: data['user'] != null ? UserModel.fromJson(data['user'] ?? {}) : UserModel.empty(),
       availableDate: data['availableDate'] ?? '',
+      userId: data['userId'] ?? '',
     );
   }
 }

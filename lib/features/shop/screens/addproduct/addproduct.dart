@@ -6,6 +6,7 @@ import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:ekra/utils/validators/validation.dart';
 import 'package:ekra/widgets/app_default_textfield.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -268,6 +269,12 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           content: Text('Product added successfully'),
                         ),
                       );
+                      itemName.clear();
+                      itemDescription.clear();
+                      itemPrice.clear();
+                      itemQuantity.clear();
+                      images.clear();
+                      setState(() {});
                     } else if (state is AddProductFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -299,6 +306,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 weeklyRate: 0,
                                 isFeatured: false,
                                 images: [],
+                                userId: FirebaseAuth.instance.currentUser!.uid,
                               ),
                               images: images,
                             ),

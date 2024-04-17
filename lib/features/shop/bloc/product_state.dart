@@ -28,3 +28,23 @@ final class AddProductFailure extends ProductState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+final class GetProductOfSpecificUserInProgress extends ProductState {}
+
+final class GetProductOfSpecificUserSuccess extends ProductState {
+  final List<ProductModel> products;
+
+  const GetProductOfSpecificUserSuccess({required this.products});
+
+  @override
+  List<Object> get props => [products];
+}
+
+final class GetProductOfSpecificUserFailure extends ProductState {
+  final String errorMessage;
+
+  const GetProductOfSpecificUserFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}

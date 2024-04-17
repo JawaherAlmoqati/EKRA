@@ -14,101 +14,113 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Get.to(() => ProductDetail(item: item)),
-      child: Container(
-        width: 216,
-        height: 293,
-        padding: const EdgeInsets.all(1),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 50, spreadRadius: 7, offset: const Offset(0, 2)),
-          ],
-          borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            RoundedContainer(
-              height: 180,
-              width: 216,
-              padding: EdgeInsets.zero,
-              backgroundColor: Colors.white,
-              child: Stack(
-                children: [
-                  RoundedImage(
-                    imageUrl: item.images!.first,
-                    applyImageRadius: false,
-                    isNetworkImage: true,
-                    //height: 180,
-                  ),
-                ],
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          width: 216,
+          height: 293,
+          padding: const EdgeInsets.all(1),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(color: Colors.grey.withOpacity(0.1), blurRadius: 50, spreadRadius: 7, offset: const Offset(0, 2)),
+            ],
+            borderRadius: BorderRadius.circular(16),
+            color: Colors.white,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RoundedContainer(
+                height: 180,
+                width: 216,
+                padding: EdgeInsets.zero,
+                backgroundColor: Colors.white,
+                child: Stack(
+                  children: [
+                    RoundedImage(
+                      imageUrl: item.images!.first,
+                      applyImageRadius: false,
+                      isNetworkImage: true,
+                      fit: BoxFit.cover,
+                      height: 180,
+                    ),
+                  ],
+                ),
               ),
-            ),
-
-            //details
-            Padding(
-              padding: const EdgeInsets.only(left: 4),
-              child: Column(
-                //mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.name,
-                    style: const TextStyle(color: Color(0xff3A3A3A), fontSize: 20, fontWeight: FontWeight.w600),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    textAlign: TextAlign.left,
-                  ),
-                  //SizedBox(height: 4),
-                  const Row(
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        color: Color(0xff3F3F3F),
-                        size: 20,
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 4,
+                  right: 4,
+                ),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.name,
+                      style: const TextStyle(
+                        color: Color(0xff3A3A3A),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Text(
-                        "6 km away",
-                        style: TextStyle(
-                          color: Color(0xff3A3A3A),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      textAlign: TextAlign.left,
+                    ),
+                    const SizedBox(height: 4),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          color: Colors.grey[600]!,
+                          size: 14,
                         ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-
-                  Row(
-                    children: [
-                      Text(
-                        '${item.price.toStringAsFixed(0)}SAR',
-                        style: const TextStyle(
+                        const SizedBox(width: 4),
+                        Text(
+                          "6 km away",
+                          style: TextStyle(
+                            color: Colors.grey[600]!,
+                            fontSize: 14,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Text(
+                          '${item.price.toStringAsFixed(0)} SAR',
+                          style: const TextStyle(
+                            color: Color(0xffFEBD59),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        // const SizedBox(width: 70),
+                        const Spacer(),
+                        const Icon(
+                          Icons.star,
                           color: Color(0xffFEBD59),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                          size: 16,
                         ),
-                      ),
-                      // const SizedBox(width: 70),
-                      const Spacer(),
-                      const Icon(
-                        Icons.star,
-                        color: Color(0xffFEBD59),
-                      ),
-                      const Text(
-                        "0.0",
-                        style: TextStyle(
-                          color: Color(0xff5A5A5A),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                        const SizedBox(width: 4),
+                        const Text(
+                          "0.0",
+                          style: TextStyle(
+                            color: Color(0xff5A5A5A),
+                            fontSize: 14,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ekra/features/shop/screens/home/homesc.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({super.key});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -28,7 +28,7 @@ class _SearchScreenState extends State<SearchScreen> {
             children: [
               // Search bar
               Container(
-               color: Color(0xFFE7E6E1),
+               color: const Color(0xFFE7E6E1),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 15),
                   child: Row(
@@ -44,7 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       Expanded(
                         child: TextFormField(
-                          autofillHints: ["Search"],
+                          autofillHints: const ["Search"],
                           controller: searchController,
                           onChanged: (value) {
                             setState(() {});
@@ -61,13 +61,13 @@ class _SearchScreenState extends State<SearchScreen> {
                             filled: true,
                             fillColor: Colors.white,
                              enabledBorder: OutlineInputBorder(
-                             borderSide: BorderSide(color: Colors.grey), // Set the border color to grey
+                             borderSide: const BorderSide(color: Colors.grey), // Set the border color to grey
                              borderRadius: BorderRadius.circular(30), // Adjust the border radius as needed
                            ),
                             // Adjust the border radius as needed
                    // Adjust the border radius as needed
                            focusedBorder: OutlineInputBorder(
-                           borderSide: BorderSide(color: Colors.grey), // Set the border color to grey
+                           borderSide: const BorderSide(color: Colors.grey), // Set the border color to grey
                             borderRadius: BorderRadius.circular(30), // Adjust the border radius as needed
                          ),
 
@@ -89,7 +89,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
               // Previous Searches
               Container(
-                color: Color(0xFFE7E6E1),
+                color: const Color(0xFFE7E6E1),
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -112,16 +112,16 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(height: 24),
                     Row(
                       children: [
-                        searchSuggestionsTime("Truck", context, Color(0xffFEBD59)),
-                        searchSuggestionsTime("Grader", context, Color(0xffFEBD59)),
-                        searchSuggestionsTime("Loaders", context, Color(0xffFEBD59)),
+                        searchSuggestionsTime("Truck", context, const Color(0xffFEBD59)),
+                        searchSuggestionsTime("Grader", context, const Color(0xffFEBD59)),
+                        searchSuggestionsTime("Loaders", context, const Color(0xffFEBD59)),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        searchSuggestionsTime("Excavators", context, Color(0xffFEBD59)),
-                        searchSuggestionsTime("Backhoe Loaders", context, Color(0xffFEBD59)),
+                        searchSuggestionsTime("Excavators", context, const Color(0xffFEBD59)),
+                        searchSuggestionsTime("Backhoe Loaders", context, const Color(0xffFEBD59)),
                       ],
                     ),
                   ],

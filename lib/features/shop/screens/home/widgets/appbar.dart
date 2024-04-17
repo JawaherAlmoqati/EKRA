@@ -11,7 +11,7 @@ class Happbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 55, left: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
           GestureDetector(

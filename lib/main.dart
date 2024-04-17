@@ -47,6 +47,9 @@ class MyApp extends StatelessWidget {
                 surfaceTintColor: Color(0xffFFD700),
                 backgroundColor: Colors.white,
               ),
+              progressIndicatorTheme: const ProgressIndicatorThemeData(
+                color: Color(0xffFFD700),
+              ),
             ),
             home: const SplashScreen(),
           ),
