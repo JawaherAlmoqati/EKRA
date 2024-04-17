@@ -23,6 +23,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final TextEditingController itemDescription = TextEditingController();
   final TextEditingController itemQuantity = TextEditingController();
   final TextEditingController itemPrice = TextEditingController();
+  final TextEditingController weeklyRate = TextEditingController();
+  final TextEditingController monthlyRate = TextEditingController();
+
   DateTime? selectedDate;
   List<File> images = [];
 
@@ -117,13 +120,37 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   height: 4,
                 ),
-                AppDefaultTextfield(
-                  hintText: '600 per day',
-                  controller: itemPrice,
-                  validator: (value) {
-                    return KValidator.validateEmptyText('Price', value);
-                  },
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                Row(
+                  children: [
+                    Expanded(
+                      child: AppDefaultTextfield(
+                        hintText: 'per day',
+                        controller: itemPrice,
+                        validator: (value) {
+                          return KValidator.validateEmptyText('Price', value);
+                        },
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: AppDefaultTextfield(
+                        hintText: 'per week',
+                        controller: weeklyRate,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                      child: AppDefaultTextfield(
+                        hintText: 'per month',
+                        controller: monthlyRate,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 15),
                 const Text(
@@ -302,8 +329,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 user: authBloc.user,
                                 id: '',
                                 image: '',
-                                monthlyRate: 0,
-                                weeklyRate: 0,
+                                monthlyRate: double.tryParse(monthlyRate.text) ?? 0,
+                                weeklyRate: double.tryParse(weeklyRate.text) ?? 0,
                                 isFeatured: false,
                                 images: [],
                                 userId: FirebaseAuth.instance.currentUser!.uid,
