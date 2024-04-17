@@ -1,4 +1,5 @@
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
+import 'package:ekra/features/shop/bloc/product_bloc.dart';
 import 'package:ekra/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:ekra/app.dart';
@@ -33,12 +34,21 @@ class MyApp extends StatelessWidget {
             BlocProvider<AuthBloc>(
               create: (context) => AuthBloc(),
             ),
+            BlocProvider<ProductBloc>(
+              create: (context) => ProductBloc(),
+            ),
           ],
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Sizer',
-            theme: ThemeData.light(),
-            home: const splash_screen(),
+            theme: ThemeData.light().copyWith(
+              primaryColor: const Color(0xffFFD700),
+              datePickerTheme: const DatePickerThemeData(
+                surfaceTintColor: Color(0xffFFD700),
+                backgroundColor: Colors.white,
+              ),
+            ),
+            home: const SplashScreen(),
           ),
         );
       },

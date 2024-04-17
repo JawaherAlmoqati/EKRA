@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 /// Model class representing user data.
 class UserModel {
-  final String id;
-  String fullName;
-  String email;
-  String phoneNumber;
-  String profilePicture;
+  final String? id;
+  String? fullName;
+  String? email;
+  String? phoneNumber;
+  String? profilePicture;
   String? bio;
 
   /// Constructor for UserModel.
@@ -20,23 +20,15 @@ class UserModel {
   });
 
   /// Static function to create an empty user model.
-  static UserModel empty() => UserModel(
-      id: '', fullName: '', email: '', phoneNumber: '', profilePicture: '');
+  static UserModel empty() => UserModel(id: '', fullName: '', email: '', phoneNumber: '', profilePicture: '');
 
   /// Convert model to JSON structure for storing data in Firebase.
   Map<String, dynamic> toJson() {
-    return {
-      'fullName': fullName,
-      'email': email,
-      'phone': phoneNumber,
-      'profilePicture': profilePicture,
-      'bio': bio
-    };
+    return {'fullName': fullName, 'email': email, 'phone': phoneNumber, 'profilePicture': profilePicture, 'bio': bio};
   }
 
   /// Factory method to create a UserModel from a Firebase document snapshot.
-  factory UserModel.fromSnapshot(
-      DocumentSnapshot<Map<String, dynamic>> document) {
+  factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(

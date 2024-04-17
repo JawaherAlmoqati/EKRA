@@ -36,7 +36,7 @@ class ProductCard extends StatelessWidget {
               child: Stack(
                 children: [
                   RoundedImage(
-                    imageUrl: item.image,
+                    imageUrl: item.images!.first,
                     applyImageRadius: false,
                     isNetworkImage: true,
                     //height: 180,
