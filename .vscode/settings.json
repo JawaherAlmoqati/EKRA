@@ -1,4 +1,5 @@
 {
     "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/rahaf/Desktop/Edda/EKRA/linux"
+    "cmake.sourceDirectory": "C:/Users/rahaf/Desktop/Edda/EKRA/linux",
+    "C_Cpp.errorSquiggles": "enabled"
 }

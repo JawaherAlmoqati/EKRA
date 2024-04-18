@@ -14,6 +14,6 @@ class AppRoutes {
     GetPage(name: TRoutes.favourite, page: () => const FavouriteScreen()),
     GetPage(name: TRoutes.myrental, page: () => const MyRentalSc()),
     GetPage(name: TRoutes.account, page: () => const AccountScreen()),
-    GetPage(name: TRoutes.addproduct, page: () => const addproductScreen()),
+    GetPage(name: TRoutes.addproduct, page: () => const AddProductScreen()),
   ];
 }

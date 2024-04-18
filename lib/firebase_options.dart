@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '905229138938',
     projectId: 'edda-1d0d8',
     storageBucket: 'edda-1d0d8.appspot.com',
+    androidClientId: '905229138938-3eee79252uukj7hohladfpa3scmgh83k.apps.googleusercontent.com',
+    iosClientId: '905229138938-mrsilkt67t9f3jiashalbnvrno6hhhkr.apps.googleusercontent.com',
     iosBundleId: 'com.example.ekra',
   );
 }

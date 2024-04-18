@@ -1,10 +1,14 @@
+import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
+import 'package:ekra/features/shop/bloc/product_bloc.dart';
 import 'package:ekra/splash_screen.dart';
-//import 'package:ekra/app.dart';
-import 'package:ekra/features/Authentication/screens/login/signin.dart';
-import 'package:flutter/material.dart'; 
 import 'package:firebase_core/firebase_core.dart';
+//import 'package:ekra/app.dart';
+//import 'package:ekra/features/Authentication/screens/login/signin.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sizer/sizer.dart';
+
 import 'firebase_options.dart';
 
 void main() async {
@@ -12,7 +16,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp(title: 'edda',));
+  runApp(const MyApp(
+    title: 'edda',
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,11 +29,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Sizer',
-          theme: ThemeData.light(),
-          home: const splash_screen(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider<AuthBloc>(
+              create: (context) => AuthBloc(),
+            ),
+            BlocProvider<ProductBloc>(
+              create: (context) => ProductBloc(),
+            ),
+          ],
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Sizer',
+            theme: ThemeData.light().copyWith(
+              primaryColor: const Color(0xffFFD700),
+              datePickerTheme: const DatePickerThemeData(
+                surfaceTintColor: Color(0xffFFD700),
+                backgroundColor: Colors.white,
+              ),
+              progressIndicatorTheme: const ProgressIndicatorThemeData(
+                color: Color(0xffFFD700),
+              ),
+            ),
+            home: const SplashScreen(),
+          ),
         );
       },
     );
