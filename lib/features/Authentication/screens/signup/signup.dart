@@ -1,8 +1,9 @@
+import 'package:ekra/features/Authentication/screens/Auth/OtpAuth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import '../Auth/OtpAuth.dart';
 import '../login/signin.dart';
 
 class SignUp extends StatefulWidget {
@@ -266,8 +267,10 @@ class _RegisterState extends State<SignUp> {
               left: 10.w,
               right: 10.w,
               child: GestureDetector(
-                onTap: _signUpWithEmailAndPassword,
-                child: Container(
+                onTap:(){ 
+                  _signUpWithEmailAndPassword();
+                  Get.to(() => const OtpAuth()); 
+                },child: Container(
                   height: 8.h,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
