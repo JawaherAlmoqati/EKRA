@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+//import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:sizer/sizer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyRentalSc extends StatefulWidget {
   const MyRentalSc({super.key});
@@ -19,20 +19,6 @@ class _HomePageState extends State<MyRentalSc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blueAccent,
-        color: Colors.white,
-        items: const <Widget>[
-          Icon(Icons.home_filled, size: 30),
-          Icon(Icons.favorite, size: 30),
-          Icon(Icons.add, size: 30),
-          Icon(Icons.list, size: 30),
-          Icon(Icons.person, size: 30),
-        ],
-        onTap: (index) {
-          //Handle button tap
-        },
-      ),
       body: SafeArea(
         child: Container(
           color: Colors.white,
