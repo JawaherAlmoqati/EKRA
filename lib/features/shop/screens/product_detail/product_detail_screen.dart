@@ -1,17 +1,33 @@
+import 'package:ekra/features/shop/favourite/bloc/favourite_bloc.dart';
 import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/price_container.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_description.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_details.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductDetail extends StatelessWidget {
+class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key, required this.item});
 
   final ProductModel item;
 
   @override
+  State<ProductDetail> createState() => _ProductDetailState();
+}
+
+class _ProductDetailState extends State<ProductDetail> {
+  late final FavouriteBloc _favouriteBloc;
+  @override
+  void initState() {
+    _favouriteBloc = context.read<FavouriteBloc>();
+    _favouriteBloc.add(CheckIfFavourite(widget.item.id));
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final FavouriteBloc favouriteBloc = context.watch<FavouriteBloc>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Detail'),
@@ -32,10 +48,10 @@ class ProductDetail extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ProductImage(item: item),
-                    ProductDetails(item: item),
-                    PriceContainer(item: item),
-                    ProductDescription(item: item),
+                    ProductImage(item: widget.item),
+                    ProductDetails(item: widget.item),
+                    PriceContainer(item: widget.item),
+                    ProductDescription(item: widget.item),
                   ],
                 ),
               ),
@@ -52,11 +68,30 @@ class ProductDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(16),
                       color: const Color(0xffFEBD59),
                     ),
-                    child: IconButton(
-                      icon: const Icon(Icons.favorite_border),
-                      color: Colors.white,
-                      onPressed: () {
-                        // Implement like button functionality
+                    child: BlocBuilder<FavouriteBloc, FavouriteState>(
+                      builder: (context, state) {
+                        if (state is AddToFavouriteInProgress || state is RemoveFromFavouriteInProgress || state is CheckIfFavouriteInProgress) {
+                          return const Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (state is AddToFavouriteSuccess || (state is CheckIfFavouriteSuccess && state.isFavourite == true)) {
+                          return IconButton(
+                            icon: const Icon(Icons.favorite),
+                            color: Colors.white,
+                            onPressed: () {
+                              favouriteBloc.add(RemoveFromFavourite(widget.item.id));
+                            },
+                          );
+                        }
+                        return IconButton(
+                          icon: const Icon(Icons.favorite_border),
+                          color: Colors.white,
+                          onPressed: () {
+                            favouriteBloc.add(AddToFavourite(widget.item.id));
+                          },
+                        );
                       },
                     ),
                   ),

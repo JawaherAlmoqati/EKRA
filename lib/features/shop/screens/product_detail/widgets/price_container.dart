@@ -1,8 +1,6 @@
 //import 'package:ekra/features/shop/controllers/product_controller.dart';
 import 'package:ekra/features/shop/models/product_model.dart';
-import 'package:ekra/features/shop/screens/product_detail/user_details.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class PriceContainer extends StatelessWidget {
   const PriceContainer({super.key, required this.item});
