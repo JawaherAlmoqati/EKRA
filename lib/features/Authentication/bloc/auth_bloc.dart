@@ -33,7 +33,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
-        FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid).set({'fullName': event.fullName, 'email': event.email, 'phone': event.phoneNumber, 'profilePicture': '', 'bio': ''});
+        await auth.currentUser!.sendEmailVerification();
+        await FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid).set({'fullName': event.fullName, 'email': event.email, 'phone': event.phoneNumber, 'profilePicture': '', 'bio': ''});
         emit(const SignUpSuccess());
       } on FirebaseException catch (e) {
         emit(SignUpFailure(errorMessage: e.code));

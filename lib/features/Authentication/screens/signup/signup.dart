@@ -1,5 +1,5 @@
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
-import 'package:ekra/homebar.dart';
+import 'package:ekra/features/Authentication/screens/Auth/OtpAuth.dart';
 import 'package:ekra/utils/validators/validation.dart';
 import 'package:ekra/widgets/app_default_textfield.dart';
 import 'package:flutter/material.dart';
@@ -163,7 +163,7 @@ class _RegisterState extends State<SignUp> {
                 child: BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
                     if (state is SignUpSuccess) {
-                      Get.offAll(() => const Homebar());
+                      Get.offAll(() => const OtpAuth());
                     } else if (state is SignUpFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

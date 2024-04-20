@@ -1,9 +1,11 @@
 import 'package:ekra/features/shop/controllers/product_controller.dart';
+import 'package:ekra/features/shop/favourite/bloc/favourite_bloc.dart';
 import 'package:ekra/features/shop/screens/home/widgets/CategoriesList.dart';
 import 'package:ekra/features/shop/screens/home/widgets/appbar.dart';
 import 'package:ekra/features/shop/screens/home/widgets/hsearchbar.dart';
 import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 class HomeeScreen extends StatefulWidget {
@@ -15,12 +17,15 @@ class HomeeScreen extends StatefulWidget {
 }
 
 class _HomeeScreenState extends State<HomeeScreen> {
+  late final FavouriteBloc _favouriteBloc;
   int selectedIndex = 0;
   late ProductController controller;
   @override
   void initState() {
     super.initState();
-    controller = Get.put(ProductController()); // Initialize your controller here
+    _favouriteBloc = context.read<FavouriteBloc>();
+    _favouriteBloc.add(const GetFavouriteItems());
+    controller = Get.put(ProductController());
   }
 
   @override

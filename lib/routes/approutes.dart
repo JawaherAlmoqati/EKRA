@@ -1,4 +1,4 @@
-import 'package:ekra/features/shop/screens/Favourite/favouritesc.dart';
+import 'package:ekra/features/shop/favourite/views/favourite_screen.dart';
 import 'package:ekra/features/shop/screens/account/accountsc.dart';
 import 'package:ekra/features/shop/screens/addproduct/addproduct.dart';
 import 'package:ekra/features/shop/screens/home/homesc.dart';

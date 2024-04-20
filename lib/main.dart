@@ -1,5 +1,6 @@
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
 import 'package:ekra/features/shop/bloc/product_bloc.dart';
+import 'package:ekra/features/shop/favourite/bloc/favourite_bloc.dart';
 import 'package:ekra/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 //import 'package:ekra/app.dart';
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
             ),
             BlocProvider<ProductBloc>(
               create: (context) => ProductBloc(),
+            ),
+            BlocProvider<FavouriteBloc>(
+              create: (context) => FavouriteBloc(),
             ),
           ],
           child: GetMaterialApp(
