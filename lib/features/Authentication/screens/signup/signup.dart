@@ -2,11 +2,13 @@ import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
 import 'package:ekra/homebar.dart';
 import 'package:ekra/utils/validators/validation.dart';
 import 'package:ekra/widgets/app_default_textfield.dart';
+import 'package:ekra/features/Authentication/screens/Auth/OtpAuth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
-
+import '../Auth/OtpAuth.dart';
 import '../login/signin.dart';
 
 class SignUp extends StatefulWidget {
@@ -207,6 +209,57 @@ class _RegisterState extends State<SignUp> {
                       ),
                     );
                   },
+                  hintStyle: const TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.white, width: 0),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.white, width: 0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(color: Colors.white, width: 0),
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                    child: Icon(
+                      _isObscure ? Icons.visibility : Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+            Positioned(
+              top: 75.h,
+              left: 10.w,
+              right: 10.w,
+              child: GestureDetector(
+                onTap:(){ 
+                  _signUpWithEmailAndPassword();
+                  Get.to(() => const OtpAuth()); 
+                },child: Container(
+                  height: 8.h,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: const Color(0xffFDBF61),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],
