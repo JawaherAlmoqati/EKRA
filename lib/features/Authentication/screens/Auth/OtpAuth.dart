@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class OtpAuth extends StatefulWidget {
-  const OtpAuth({Key? key}) : super(key: key);
+  const OtpAuth({super.key});
 
   @override
   _OtpState createState() => _OtpState();
@@ -13,7 +13,7 @@ class _OtpState extends State<OtpAuth> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
+      backgroundColor: const Color(0xfff7f6fb),
       body: SafeArea(
         child: Stack(
           children: [
@@ -37,129 +37,125 @@ class _OtpState extends State<OtpAuth> {
             Positioned(
               left: 5.w,
               top: 6.h,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.black54,
-                  ),
-                  ), ),
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(
+                  Icons.arrow_back,
+                  size: 32,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
             Positioned(
-                left: 10.w,
-                top: 15.h,
-                child:
-                  Text(
-                    'Verification',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),),
-
-         Padding(
-          padding: EdgeInsets.symmetric(vertical: 200, horizontal: 32),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 60,
-              ),Text(
-                "Enter your OTP code number",
+              left: 10.w,
+              top: 15.h,
+              child: const Text(
+                'Verification',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black38,
                 ),
-                textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: 30,
-              ),
-              
-              Container(
-                padding: EdgeInsets.all(3),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 200, horizontal: 32),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 60,
+                  ),
+                  const Text(
+                    "Enter your OTP code number",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black38,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(3),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
                       children: [
-                        _textFieldOTP(first: true, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: true),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 22,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(const Color(0xffFDBF61)),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _textFieldOTP(first: true, last: false),
+                            _textFieldOTP(first: false, last: false),
+                            _textFieldOTP(first: false, last: false),
+                            _textFieldOTP(first: false, last: true),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffFDBF61)),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(14.0),
+                              child: Text(
+                                'Verify',
+                                style: TextStyle(color: Colors.black, fontSize: 14.sp, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-                            'Verify',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  const Text(
+                    "Didn't you receive any code?",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black38,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  const Text(
+                    "Resend New Code",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Didn't you receive any code?",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Resend New Code",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ]),
-    ));
+      ),
+    );
   }
 
   Widget _textFieldOTP({required bool first, last}) {
-    return Container(
+    return SizedBox(
       height: 85,
       child: AspectRatio(
         aspectRatio: 1.0,
@@ -169,24 +165,20 @@ class _OtpState extends State<OtpAuth> {
             if (value.length == 1 && last == false) {
               FocusScope.of(context).nextFocus();
             }
-            if (value.length == 0 && first == false) {
+            if (value.isEmpty && first == false) {
               FocusScope.of(context).previousFocus();
             }
           },
           showCursor: false,
           readOnly: false,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           keyboardType: TextInputType.number,
           maxLength: 1,
           decoration: InputDecoration(
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: const Color(0xffFDBF61)),
-                borderRadius: BorderRadius.circular(12)),
+            counter: const Offstage(),
+            enabledBorder: OutlineInputBorder(borderSide: const BorderSide(width: 2, color: Colors.black12), borderRadius: BorderRadius.circular(12)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(width: 2, color: Color(0xffFDBF61)), borderRadius: BorderRadius.circular(12)),
           ),
         ),
       ),
