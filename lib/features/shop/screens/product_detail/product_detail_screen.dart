@@ -1,11 +1,14 @@
 import 'package:ekra/features/shop/favourite/bloc/favourite_bloc.dart';
 import 'package:ekra/features/shop/models/product_model.dart';
+import 'package:ekra/features/shop/screens/product_detail/checkout/select_quantity_duration_screen.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/price_container.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_description.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_details.dart';
 import 'package:ekra/features/shop/screens/product_detail/widgets/product_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key, required this.item});
@@ -109,7 +112,13 @@ class _ProductDetailState extends State<ProductDetail> {
                         ),
                       ),
                       onPressed: () {
-                        // Implement functionality
+                        if (widget.item.userId != FirebaseAuth.instance.currentUser?.uid) {
+                          Get.to(
+                            SelectQuantityandDurationScreen(item: widget.item),
+                          );
+                        } else {
+                          Get.snackbar('Error', 'You can not rent your own product', snackPosition: SnackPosition.BOTTOM);
+                        }
                       },
                       child: const Text('Check for Available'),
                     ),

@@ -81,4 +81,21 @@ class ProductModel {
       userId: data['userId'] ?? '',
     );
   }
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
+      id: json['id'] ?? '',
+      name: json['name'],
+      price: json['price'],
+      image: json['image'],
+      description: json['description'],
+      monthlyRate: json['monthlyRate'],
+      weeklyRate: json['weeklyRate'],
+      isFeatured: json['isFeatured'],
+      images: json['Images'] != null ? List<String>.from(json['Images']) : [],
+      user: json['user'] != null ? UserModel.fromJson(json['user']) : UserModel.empty(),
+      availableDate: json['availableDate'],
+      userId: json['userId'],
+    );
+  }
 }

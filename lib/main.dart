@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
             title: 'Sizer',
             theme: ThemeData.light().copyWith(
               primaryColor: const Color(0xffFFD700),
+              primaryColorLight: const Color(0xffFFD700),
               datePickerTheme: const DatePickerThemeData(
                 surfaceTintColor: Color(0xffFFD700),
                 backgroundColor: Colors.white,

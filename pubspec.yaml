@@ -61,7 +61,7 @@ dependencies:
   image_picker: ^1.0.8
 
   # Firebase Services
-  firebase_core: ^2.27.2
+  firebase_core: ^2.30.0
   cloud_firestore: ^4.16.0
   firebase_storage: ^11.7.1
 
@@ -72,6 +72,8 @@ dependencies:
 
   file_picker: ^8.0.0+1
   curved_navigation_bar: ^1.0.3
+
+  syncfusion_flutter_datepicker: ^25.1.40
 
 dev_dependencies:
   flutter_test:

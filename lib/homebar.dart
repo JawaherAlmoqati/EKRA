@@ -2,7 +2,7 @@ import 'package:ekra/features/shop/favourite/views/favourite_screen.dart';
 import 'package:ekra/features/shop/screens/account/accountsc.dart';
 import 'package:ekra/features/shop/screens/addproduct/addproduct.dart';
 import 'package:ekra/features/shop/screens/home/homesc.dart';
-import 'package:ekra/features/shop/screens/myrental/myrentalsc.dart';
+import 'package:ekra/features/shop/screens/myrental/rental_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
