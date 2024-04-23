@@ -61,11 +61,10 @@ class AppScreenController extends GetxController {
   static AppScreenController get instance => Get.find();
 
   final Rx<int> selectedMenu = 0.obs;
-
   final screens = [
     const HomeeScreen(),
     const FavouriteScreen(),
-    const addproductScreen(),
+    const AddProductScreen(),
     const MyRentalSc(),
     const AccountScreen()
   ];

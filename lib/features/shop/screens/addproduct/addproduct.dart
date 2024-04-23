@@ -110,7 +110,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   validator: (value) {
                     return KValidator.validateEmptyText('Quantity', value);
                   },
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 ),
                 const SizedBox(height: 15),
                 const Text(
@@ -129,7 +130,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         validator: (value) {
                           return KValidator.validateEmptyText('Price', value);
                         },
-                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -137,7 +139,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: AppDefaultTextfield(
                         hintText: 'per week',
                         controller: weeklyRate,
-                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                       ),
                     ),
                     const SizedBox(
@@ -147,7 +150,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       child: AppDefaultTextfield(
                         hintText: 'per month',
                         controller: monthlyRate,
-                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                        keyboardType: const TextInputType.numberWithOptions(
+                            decimal: true),
                       ),
                     ),
                   ],
@@ -185,7 +189,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         const Icon(Icons.calendar_today),
                         const SizedBox(width: 10),
                         Text(
-                          selectedDate == null ? 'Select Date' : '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
+                          selectedDate == null
+                              ? 'Select Date'
+                              : '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}',
                           style: const TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -329,8 +335,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 user: authBloc.user,
                                 id: '',
                                 image: '',
-                                monthlyRate: double.tryParse(monthlyRate.text) ?? 0,
-                                weeklyRate: double.tryParse(weeklyRate.text) ?? 0,
+                                monthlyRate:
+                                    double.tryParse(monthlyRate.text) ?? 0,
+                                weeklyRate:
+                                    double.tryParse(weeklyRate.text) ?? 0,
                                 isFeatured: false,
                                 images: [],
                                 userId: FirebaseAuth.instance.currentUser!.uid,
