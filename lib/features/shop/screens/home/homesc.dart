@@ -58,9 +58,9 @@ class _HomeeScreenState extends State<HomeeScreen> {
                       Text(
                         "Categories",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22,
                           // ignore: use_full_hex_values_for_flutter_colors
-                          color: Color(0xff81d1d21),
+                          color: Color(0xFF333333),
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -87,9 +87,9 @@ class _HomeeScreenState extends State<HomeeScreen> {
                       const Text(
                         "Popular choices",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 22,
                           // ignore: use_full_hex_values_for_flutter_colors
-                          color: Color(0xff81d1d21),
+                          color: Color(0xFF333333),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -116,7 +116,9 @@ class _HomeeScreenState extends State<HomeeScreen> {
 
                   // If there are no products and loading is complete
                   if (controller.featuredProducts.isEmpty) {
-                    return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                    return Center(
+                        child: Text('No Data Found!',
+                            style: Theme.of(context).textTheme.bodyMedium));
                   } else {
                     // Else, render the GridView with products
                     return GridView.builder(
@@ -128,7 +130,8 @@ class _HomeeScreenState extends State<HomeeScreen> {
                         right: 20,
                         top: 16,
                       ),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
                         crossAxisSpacing: 16,

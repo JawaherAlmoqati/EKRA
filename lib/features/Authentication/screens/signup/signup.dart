@@ -49,14 +49,18 @@ class _RegisterState extends State<SignUp> {
                 left: -10.w,
                 width: 70.w,
                 height: 30.h,
-                child: Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
+                child:
+                    Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
               ),
               Positioned(
                   left: 10.w,
                   top: 15.h,
                   child: Text(
                     "Welcome",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.black, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold),
                   )),
               Positioned(
                 top: 30.h,
@@ -64,7 +68,9 @@ class _RegisterState extends State<SignUp> {
                 child: Container(
                   height: 6.h,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(color: const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(
+                      color: const Color(0xffE2E2E0),
+                      borderRadius: BorderRadius.circular(10)),
                   width: 80.w,
                   child: Row(
                     children: [
@@ -78,7 +84,11 @@ class _RegisterState extends State<SignUp> {
                           child: Container(
                             margin: EdgeInsets.only(left: 2.w),
                             height: 5.h,
-                            decoration: BoxDecoration(color: isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(
+                                color: isSignInActive
+                                    ? Colors.white
+                                    : const Color(0xffE2E2E0),
+                                borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Sign In',
@@ -96,7 +106,11 @@ class _RegisterState extends State<SignUp> {
                           child: Container(
                             height: 5.h,
                             margin: EdgeInsets.only(right: 2.w),
-                            decoration: BoxDecoration(color: !isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(
+                                color: !isSignInActive
+                                    ? Colors.white
+                                    : const Color(0xffE2E2E0),
+                                borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Register',
@@ -113,7 +127,7 @@ class _RegisterState extends State<SignUp> {
                 ),
               ),
               Positioned(
-                top: 38.h,
+                top: 40.h,
                 left: 10.w,
                 right: 10.w,
                 child: AppDefaultTextfield(
@@ -126,7 +140,7 @@ class _RegisterState extends State<SignUp> {
                 ),
               ),
               Positioned(
-                top: 47.h,
+                top: 50.h,
                 left: 10.w,
                 right: 10.w,
                 child: AppDefaultTextfield(
@@ -136,7 +150,7 @@ class _RegisterState extends State<SignUp> {
                 ),
               ),
               Positioned(
-                top: 56.h,
+                top: 60.h,
                 left: 10.w,
                 right: 10.w,
                 child: AppDefaultTextfield(
@@ -146,7 +160,7 @@ class _RegisterState extends State<SignUp> {
                 ),
               ),
               Positioned(
-                top: 65.h,
+                top: 70.h,
                 left: 10.w,
                 right: 10.w,
                 child: AppDefaultTextfield(
@@ -157,7 +171,7 @@ class _RegisterState extends State<SignUp> {
                 ),
               ),
               Positioned(
-                top: 75.h,
+                top: 86.h,
                 left: 10.w,
                 right: 10.w,
                 child: BlocConsumer<AuthBloc, AuthState>(
@@ -199,7 +213,7 @@ class _RegisterState extends State<SignUp> {
                         child: Text(
                           "Continue",
                           style: TextStyle(
-                            color: Colors.black,
+                            color: const Color(0xFF333333),
                             fontSize: 14.sp,
                             fontWeight: FontWeight.bold,
                           ),
