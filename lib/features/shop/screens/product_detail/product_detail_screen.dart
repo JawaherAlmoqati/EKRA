@@ -92,7 +92,15 @@ class _ProductDetailState extends State<ProductDetail> {
                           icon: const Icon(Icons.favorite_border),
                           color: Colors.white,
                           onPressed: () {
-                            favouriteBloc.add(AddToFavourite(widget.item.id));
+                            if (FirebaseAuth.instance.currentUser != null) {
+                              favouriteBloc.add(AddToFavourite(widget.item.id));
+                            } else {
+                              Get.snackbar(
+                                'Error',
+                                'Please login to add this product to your favourite list',
+                                snackPosition: SnackPosition.BOTTOM,
+                              );
+                            }
                           },
                         );
                       },
@@ -112,12 +120,20 @@ class _ProductDetailState extends State<ProductDetail> {
                         ),
                       ),
                       onPressed: () {
-                        if (widget.item.userId != FirebaseAuth.instance.currentUser?.uid) {
-                          Get.to(
-                            SelectQuantityandDurationScreen(item: widget.item),
-                          );
+                        if (FirebaseAuth.instance.currentUser != null) {
+                          if (widget.item.userId != FirebaseAuth.instance.currentUser?.uid) {
+                            Get.to(
+                              SelectQuantityandDurationScreen(item: widget.item),
+                            );
+                          } else {
+                            Get.snackbar('Error', 'You can not rent your own product', snackPosition: SnackPosition.BOTTOM);
+                          }
                         } else {
-                          Get.snackbar('Error', 'You can not rent your own product', snackPosition: SnackPosition.BOTTOM);
+                          Get.snackbar(
+                            'Error',
+                            'Please login to rent this product',
+                            snackPosition: SnackPosition.BOTTOM,
+                          );
                         }
                       },
                       child: const Text('Check for Available'),

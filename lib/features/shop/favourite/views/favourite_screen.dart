@@ -1,5 +1,6 @@
 import 'package:ekra/features/shop/favourite/bloc/favourite_bloc.dart';
 import 'package:ekra/features/shop/favourite/views/product_card_horizontal.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +17,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   @override
   void initState() {
     _favouriteBloc = context.read<FavouriteBloc>();
-    _favouriteBloc.add(const GetFavouriteItems());
+    if (FirebaseAuth.instance.currentUser != null) {
+      _favouriteBloc.add(const GetFavouriteItems());
+    }
     super.initState();
   }
 
@@ -33,6 +36,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          leading: const SizedBox(),
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: const Text(
@@ -44,42 +48,60 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           ),
         ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Expanded(
-                  child: BlocBuilder<FavouriteBloc, FavouriteState>(
-                    builder: (context, state) {
-                      if (state is GetFavouriteItemsInProgress) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      if (state is GetFavouriteItemsFailed) {
-                        return Center(
-                          child: Text(state.error),
-                        );
-                      }
-                      if (_favouriteBloc.favouriteProducts.isEmpty) {
-                        return const Center(child: Text('No Favourite Items'));
-                      }
-                      return RefreshIndicator.adaptive(
-                        onRefresh: () async {
-                          _favouriteBloc.add(const GetFavouriteItems());
+          child: FirebaseAuth.instance.currentUser == null
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Please login to view your favourite items',
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
                         },
-                        child: ListView.separated(
-                          itemCount: favouriteBloc.favouriteProducts.length,
-                          separatorBuilder: (_, __) => const SizedBox(height: 16),
-                          itemBuilder: (_, index) => ProductCardHorizontal(
-                            product: _favouriteBloc.favouriteProducts[index],
-                          ),
-                        ),
-                      );
-                    },
+                        child: const Text('Login'),
+                      )
+                    ],
                   ),
                 )
-              ],
-            ),
-          ),
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: BlocBuilder<FavouriteBloc, FavouriteState>(
+                          builder: (context, state) {
+                            if (state is GetFavouriteItemsInProgress) {
+                              return const Center(child: CircularProgressIndicator());
+                            }
+                            if (state is GetFavouriteItemsFailed) {
+                              return Center(
+                                child: Text(state.error),
+                              );
+                            }
+                            if (_favouriteBloc.favouriteProducts.isEmpty) {
+                              return const Center(child: Text('No Favourite Items'));
+                            }
+                            return RefreshIndicator.adaptive(
+                              onRefresh: () async {
+                                _favouriteBloc.add(const GetFavouriteItems());
+                              },
+                              child: ListView.separated(
+                                itemCount: favouriteBloc.favouriteProducts.length,
+                                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                                itemBuilder: (_, index) => ProductCardHorizontal(
+                                  product: _favouriteBloc.favouriteProducts[index],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
         ),
       ),
     );

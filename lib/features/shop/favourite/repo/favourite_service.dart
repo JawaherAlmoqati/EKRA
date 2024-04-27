@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class FavoritesService {
   final CollectionReference _favoritesCollection = FirebaseFirestore.instance.collection('favorites');
-  final String userId = FirebaseAuth.instance.currentUser!.uid;
+  final String userId = FirebaseAuth.instance.currentUser?.uid??'';
 
   Future<void> addToFavorites(String itemId) async {
     return await _favoritesCollection.doc(userId).update({

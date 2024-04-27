@@ -21,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         emit(const LoginSuccess());
       } on FirebaseException catch (e) {
-        emit(SignUpFailure(errorMessage: e.code));
+        emit(LoginFailure(errorMessage: e.code));
       } catch (e) {
         emit(LoginFailure(errorMessage: e.toString()));
       }
@@ -33,8 +33,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
-        await auth.currentUser!.sendEmailVerification();
-        await FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid).set({'fullName': event.fullName, 'email': event.email, 'phone': event.phoneNumber, 'profilePicture': '', 'bio': ''});
+        await auth.currentUser!.sendEmailVerification(
+          ActionCodeSettings(
+            url: 'https://ekra-1.web.app',
+            handleCodeInApp: true,
+            iOSBundleId: 'com.example.ekra',
+            androidPackageName: 'com.example.ekra',
+            androidInstallApp: true,
+            androidMinimumVersion: '16',
+          ),
+        );
+        await FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid).set({
+          'fullName': event.fullName,
+          'email': event.email,
+          'phone': event.phoneNumber,
+          'profilePicture': '',
+          'bio': '',
+        });
         emit(const SignUpSuccess());
       } on FirebaseException catch (e) {
         emit(SignUpFailure(errorMessage: e.code));
