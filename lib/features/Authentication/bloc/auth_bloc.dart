@@ -19,16 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           password: event.password,
         );
         if (!auth.currentUser!.emailVerified) {
-          await auth.currentUser!.sendEmailVerification(
-            ActionCodeSettings(
-              url: 'https://ekra-1.web.app',
-              handleCodeInApp: true,
-              iOSBundleId: 'com.example.ekra',
-              androidPackageName: 'com.example.ekra',
-              androidInstallApp: true,
-              androidMinimumVersion: '16',
-            ),
-          );
+          await auth.currentUser!.sendEmailVerification();
           emit(VerifyEmail());
         } else {
           emit(const LoginSuccess());
@@ -46,16 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
-        await auth.currentUser!.sendEmailVerification(
-          ActionCodeSettings(
-            url: 'https://ekra-1.web.app',
-            handleCodeInApp: true,
-            iOSBundleId: 'com.example.ekra',
-            androidPackageName: 'com.example.ekra',
-            androidInstallApp: true,
-            androidMinimumVersion: '16',
-          ),
-        );
+        await auth.currentUser!.sendEmailVerification();
         await FirebaseFirestore.instance.collection('users').doc(auth.currentUser!.uid).set({
           'fullName': event.fullName,
           'email': event.email,
@@ -88,16 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResendVerificationEmailEvent>((event, emit) async {
       emit(ResendVerificationEmailInProgress());
       try {
-        await auth.currentUser!.sendEmailVerification(
-          ActionCodeSettings(
-            url: 'https://ekra-1.web.app',
-            handleCodeInApp: true,
-            iOSBundleId: 'com.example.ekra',
-            androidPackageName: 'com.example.ekra',
-            androidInstallApp: true,
-            androidMinimumVersion: '16',
-          ),
-        );
+        await auth.currentUser!.sendEmailVerification();
         emit(const ResendVerificationEmailSuccess());
       } on FirebaseException catch (e) {
         emit(ResendVerificationEmailFailure(errorMessage: e.code));

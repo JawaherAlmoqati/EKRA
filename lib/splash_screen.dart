@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
 import 'package:ekra/features/Authentication/screens/login/signin.dart';
+import 'package:ekra/features/Authentication/screens/verify_email_screen.dart';
 import 'package:ekra/homebar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:ekra/main.dart';
@@ -22,6 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
     authBloc = context.read<AuthBloc>();
     if (FirebaseAuth.instance.currentUser != null) {
       authBloc.add(const GetCurrentUserEvent());
+    } else if (FirebaseAuth.instance.currentUser != null && !FirebaseAuth.instance.currentUser!.emailVerified) {
+      authBloc.add(const ResendVerificationEmailEvent());
     }
     super.initState();
   }
@@ -36,7 +39,11 @@ class _SplashScreenState extends State<SplashScreen> {
         radius: 300,
         backgroundImage: AssetImage("assets/images/eddalogo.png"),
       ),
-      nextScreen: FirebaseAuth.instance.currentUser == null ? const SignIn() : const Homebar(),
+      nextScreen: FirebaseAuth.instance.currentUser == null
+          ? const SignIn()
+          : FirebaseAuth.instance.currentUser!.emailVerified
+              ? const Homebar()
+              : const VerifyEmailScreen(),
     );
   }
 }
