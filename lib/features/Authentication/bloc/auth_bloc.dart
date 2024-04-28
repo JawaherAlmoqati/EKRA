@@ -86,6 +86,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
     on<ResendVerificationEmailEvent>((event, emit) async {
+      emit(ResendVerificationEmailInProgress());
       try {
         await auth.currentUser!.sendEmailVerification(
           ActionCodeSettings(
@@ -97,7 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             androidMinimumVersion: '16',
           ),
         );
-        emit(VerifyEmail());
+        emit(const ResendVerificationEmailSuccess());
       } on FirebaseException catch (e) {
         emit(ResendVerificationEmailFailure(errorMessage: e.code));
       } catch (e) {
