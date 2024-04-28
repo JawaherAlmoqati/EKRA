@@ -28,7 +28,7 @@ final class SignUpEvent extends AuthEvent {
 
   const SignUpEvent({
     required this.fullName,
-    required this.email,  
+    required this.email,
     required this.phoneNumber,
     required this.password,
   });
@@ -39,4 +39,8 @@ final class SignUpEvent extends AuthEvent {
 
 final class GetCurrentUserEvent extends AuthEvent {
   const GetCurrentUserEvent();
+}
+
+final class ResendVerificationEmailEvent extends AuthEvent {
+  const ResendVerificationEmailEvent();
 }

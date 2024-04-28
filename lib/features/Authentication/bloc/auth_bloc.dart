@@ -18,8 +18,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           email: event.email,
           password: event.password,
         );
-
-        emit(const LoginSuccess());
+        if (!auth.currentUser!.emailVerified) {
+          await auth.currentUser!.sendEmailVerification(
+            ActionCodeSettings(
+              url: 'https://ekra-1.web.app',
+              handleCodeInApp: true,
+              iOSBundleId: 'com.example.ekra',
+              androidPackageName: 'com.example.ekra',
+              androidInstallApp: true,
+              androidMinimumVersion: '16',
+            ),
+          );
+          emit(VerifyEmail());
+        } else {
+          emit(const LoginSuccess());
+        }
       } on FirebaseException catch (e) {
         emit(LoginFailure(errorMessage: e.code));
       } catch (e) {
@@ -50,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           'profilePicture': '',
           'bio': '',
         });
-        emit(const SignUpSuccess());
+        emit(VerifyEmail());
       } on FirebaseException catch (e) {
         emit(SignUpFailure(errorMessage: e.code));
       } catch (e) {
@@ -70,6 +83,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(SignUpFailure(errorMessage: e.code));
       } catch (e) {
         throw Exception(e);
+      }
+    });
+    on<ResendVerificationEmailEvent>((event, emit) async {
+      try {
+        await auth.currentUser!.sendEmailVerification(
+          ActionCodeSettings(
+            url: 'https://ekra-1.web.app',
+            handleCodeInApp: true,
+            iOSBundleId: 'com.example.ekra',
+            androidPackageName: 'com.example.ekra',
+            androidInstallApp: true,
+            androidMinimumVersion: '16',
+          ),
+        );
+        emit(VerifyEmail());
+      } on FirebaseException catch (e) {
+        emit(ResendVerificationEmailFailure(errorMessage: e.code));
+      } catch (e) {
+        emit(ResendVerificationEmailFailure(errorMessage: e.toString()));
       }
     });
   }

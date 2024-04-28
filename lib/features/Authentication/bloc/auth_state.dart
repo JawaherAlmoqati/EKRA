@@ -48,3 +48,44 @@ final class SignUpFailure extends AuthState {
   @override
   List<Object> get props => [errorMessage];
 }
+
+final class VerifyEmail extends AuthState {}
+
+final class VerifyEmailSuccess extends AuthState {
+  
+
+  const VerifyEmailSuccess();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class VerifyEmailFailure extends AuthState {
+  final String errorMessage;
+
+  const VerifyEmailFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+final class ResendVerificationEmailInProgress extends AuthState {}
+
+final class ResendVerificationEmailSuccess extends AuthState {
+  
+
+  const ResendVerificationEmailSuccess();
+
+  @override
+  List<Object> get props => [];
+}
+
+final class ResendVerificationEmailFailure extends AuthState {
+  final String errorMessage;
+
+  const ResendVerificationEmailFailure({required this.errorMessage});
+
+  @override
+  List<Object> get props => [errorMessage];
+}
+

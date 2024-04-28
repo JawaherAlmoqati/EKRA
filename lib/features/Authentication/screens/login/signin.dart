@@ -1,5 +1,6 @@
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
 import 'package:ekra/features/Authentication/screens/signup/signup.dart';
+import 'package:ekra/features/Authentication/screens/verify_email_screen.dart';
 import 'package:ekra/homebar.dart';
 import 'package:ekra/utils/validators/validation.dart';
 import 'package:ekra/widgets/app_default_textfield.dart';
@@ -50,8 +51,7 @@ class _SignInState extends State<SignIn> {
                 left: -10.w,
                 width: 70.w,
                 height: 30.h,
-                child:
-                    Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
+                child: Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
               ),
               Positioned(
                 right: 5.w,
@@ -75,10 +75,7 @@ class _SignInState extends State<SignIn> {
                   top: 15.h,
                   child: Text(
                     "Welcome\nBack",
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black, fontWeight: FontWeight.bold),
                   )),
               Positioned(
                 top: 30.h,
@@ -86,9 +83,7 @@ class _SignInState extends State<SignIn> {
                 child: Container(
                   height: 6.h,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffE2E2E0),
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                   width: 80.w,
                   child: Row(
                     children: [
@@ -102,11 +97,7 @@ class _SignInState extends State<SignIn> {
                           child: Container(
                             margin: EdgeInsets.only(left: 2.w),
                             height: 5.h,
-                            decoration: BoxDecoration(
-                                color: isSignInActive
-                                    ? Colors.white
-                                    : const Color(0xffE2E2E0),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Sign In',
@@ -129,11 +120,7 @@ class _SignInState extends State<SignIn> {
                           child: Container(
                             height: 5.h,
                             margin: EdgeInsets.only(right: 2.w),
-                            decoration: BoxDecoration(
-                                color: !isSignInActive
-                                    ? Colors.white
-                                    : const Color(0xffE2E2E0),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: !isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Register',
@@ -201,7 +188,9 @@ class _SignInState extends State<SignIn> {
                 right: 10.w,
                 child: BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    if (state is LoginSuccess) {
+                    if (state is VerifyEmail) {
+                      Get.to(() => const VerifyEmailScreen());
+                    } else if (state is LoginSuccess) {
                       Get.to(() => const Homebar());
                     } else if (state is LoginFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -233,15 +222,10 @@ class _SignInState extends State<SignIn> {
                       child: Container(
                         height: 8.h,
                         alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffFDBF61),
-                            borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(color: const Color(0xffFDBF61), borderRadius: BorderRadius.circular(10)),
                         child: Text(
                           "Sign In",
-                          style: TextStyle(
-                              color: const Color(0xFF333333),
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: const Color(0xFF333333), fontSize: 14.sp, fontWeight: FontWeight.bold),
                         ),
                       ),
                     );
@@ -282,23 +266,19 @@ class _SignInState extends State<SignIn> {
                           final FirebaseAuth auth = FirebaseAuth.instance;
                           final GoogleSignIn googleSignIn = GoogleSignIn();
                           // Trigger the authentication flow
-                          final GoogleSignInAccount? googleUser =
-                              await googleSignIn.signIn();
+                          final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
                           // Obtain the auth details from the request
-                          final GoogleSignInAuthentication googleAuth =
-                              await googleUser!.authentication;
+                          final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
 
                           // Create a new credential
-                          final OAuthCredential credential =
-                              GoogleAuthProvider.credential(
+                          final OAuthCredential credential = GoogleAuthProvider.credential(
                             accessToken: googleAuth.accessToken,
                             idToken: googleAuth.idToken,
                           );
 
                           // Sign in to Firebase with the credential
-                          final UserCredential userCredential =
-                              await auth.signInWithCredential(credential);
+                          final UserCredential userCredential = await auth.signInWithCredential(credential);
                           print(userCredential);
                         },
                         child: Container(
@@ -315,8 +295,7 @@ class _SignInState extends State<SignIn> {
                               Image.asset("assets/images/google.png"),
                               Text(
                                 "Google",
-                                style: TextStyle(
-                                    fontSize: 14.sp, color: Colors.black26),
+                                style: TextStyle(fontSize: 14.sp, color: Colors.black26),
                               )
                             ],
                           ),
@@ -326,33 +305,28 @@ class _SignInState extends State<SignIn> {
                         onTap: () async {
                           final FirebaseAuth auth = FirebaseAuth.instance;
                           // Create an `AuthorizationCredentialAppleID` instance
-                          final AuthorizationCredentialAppleID appleCredential =
-                              await SignInWithApple.getAppleIDCredential(
+                          final AuthorizationCredentialAppleID appleCredential = await SignInWithApple.getAppleIDCredential(
                             scopes: [
                               AppleIDAuthorizationScopes.email,
                               AppleIDAuthorizationScopes.fullName,
                             ],
                             webAuthenticationOptions: WebAuthenticationOptions(
                               clientId: 'your_client_id',
-                              redirectUri:
-                                  Uri.parse('https://your-redirect-uri.com'),
+                              redirectUri: Uri.parse('https://your-redirect-uri.com'),
                             ),
                           );
 
                           // Create a new `OAuthProvider` credential
-                          final OAuthProvider oAuthProvider =
-                              OAuthProvider('apple.com');
+                          final OAuthProvider oAuthProvider = OAuthProvider('apple.com');
 
                           // Create `AuthCredential` using the `AuthorizationCredentialAppleID`
-                          final AuthCredential credential =
-                              oAuthProvider.credential(
+                          final AuthCredential credential = oAuthProvider.credential(
                             idToken: appleCredential.identityToken,
                             accessToken: appleCredential.authorizationCode,
                           );
 
                           // Sign in to Firebase with the credential
-                          final UserCredential userCredential =
-                              await auth.signInWithCredential(credential);
+                          final UserCredential userCredential = await auth.signInWithCredential(credential);
                           print(userCredential);
                         },
                         child: Container(
@@ -369,8 +343,7 @@ class _SignInState extends State<SignIn> {
                               Image.asset("assets/images/apple.png"),
                               Text(
                                 "Apple",
-                                style: TextStyle(
-                                    fontSize: 14.sp, color: Colors.black26),
+                                style: TextStyle(fontSize: 14.sp, color: Colors.black26),
                               )
                             ],
                           ),

@@ -1,5 +1,6 @@
 import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
-import 'package:ekra/features/Authentication/screens/Auth/OtpAuth.dart';
+import 'package:ekra/features/Authentication/screens/verify_email_screen.dart';
+import 'package:ekra/homebar.dart';
 import 'package:ekra/utils/validators/validation.dart';
 import 'package:ekra/widgets/app_default_textfield.dart';
 import 'package:flutter/material.dart';
@@ -49,18 +50,14 @@ class _RegisterState extends State<SignUp> {
                 left: -10.w,
                 width: 70.w,
                 height: 30.h,
-                child:
-                    Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
+                child: Image.asset("assets/images/yellow.png", fit: BoxFit.cover),
               ),
               Positioned(
                   left: 10.w,
                   top: 15.h,
                   child: Text(
                     "Welcome",
-                    style: TextStyle(
-                        fontSize: 16.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black, fontWeight: FontWeight.bold),
                   )),
               Positioned(
                 top: 30.h,
@@ -68,9 +65,7 @@ class _RegisterState extends State<SignUp> {
                 child: Container(
                   height: 6.h,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffE2E2E0),
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                   width: 80.w,
                   child: Row(
                     children: [
@@ -84,11 +79,7 @@ class _RegisterState extends State<SignUp> {
                           child: Container(
                             margin: EdgeInsets.only(left: 2.w),
                             height: 5.h,
-                            decoration: BoxDecoration(
-                                color: isSignInActive
-                                    ? Colors.white
-                                    : const Color(0xffE2E2E0),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Sign In',
@@ -106,11 +97,7 @@ class _RegisterState extends State<SignUp> {
                           child: Container(
                             height: 5.h,
                             margin: EdgeInsets.only(right: 2.w),
-                            decoration: BoxDecoration(
-                                color: !isSignInActive
-                                    ? Colors.white
-                                    : const Color(0xffE2E2E0),
-                                borderRadius: BorderRadius.circular(10)),
+                            decoration: BoxDecoration(color: !isSignInActive ? Colors.white : const Color(0xffE2E2E0), borderRadius: BorderRadius.circular(10)),
                             child: const Center(
                               child: Text(
                                 'Register',
@@ -176,8 +163,10 @@ class _RegisterState extends State<SignUp> {
                 right: 10.w,
                 child: BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
-                    if (state is SignUpSuccess) {
-                      Get.offAll(() => const OtpAuth());
+                    if (state is VerifyEmail) {
+                      Get.offAll(() => const VerifyEmailScreen());
+                    } else if (state is SignUpSuccess) {
+                      Get.offAll(() => const Homebar());
                     } else if (state is SignUpFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
