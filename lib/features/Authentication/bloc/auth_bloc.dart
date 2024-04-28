@@ -34,7 +34,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(const LoginSuccess());
         }
       } on FirebaseException catch (e) {
-        emit(LoginFailure(errorMessage: e.code));
+        emit(LoginFailure(errorMessage: e.message ?? 'An error occurred'));
       } catch (e) {
         emit(LoginFailure(errorMessage: e.toString()));
       }
@@ -65,7 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         });
         emit(VerifyEmail());
       } on FirebaseException catch (e) {
-        emit(SignUpFailure(errorMessage: e.code));
+        emit(SignUpFailure(errorMessage: e.message ?? 'An error occurred'));
       } catch (e) {
         emit(SignUpFailure(errorMessage: e.toString()));
       }

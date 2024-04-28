@@ -2,6 +2,7 @@ import 'package:ekra/common/widgets/images/rounded_image.dart';
 import 'package:ekra/features/shop/bloc/product_bloc.dart';
 import 'package:ekra/features/shop/models/order_model.dart';
 import 'package:ekra/features/shop/models/product_model.dart';
+import 'package:ekra/features/shop/screens/product_detail/checkout/select_payment_method.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -192,67 +193,47 @@ class _SelectQuantityandDurationScreenState extends State<SelectQuantityandDurat
                     ),
                   ),
                   const Spacer(),
-                  BlocConsumer<ProductBloc, ProductState>(
-                    listener: (context, state) {
-                      if (state is BookProductSuccess) {
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xffFFD700),
+                    ),
+                    onPressed: () {
+                      if (_range != null && _range!.startDate != null && _range!.endDate != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SelectPaymentMethod(
+                              item: OrderModel(
+                                orderDate: DateTime.now(),
+                                item: widget.item,
+                                quantity: quantity,
+                                totalAmount: widget.item.price * quantity,
+                                customerName: FirebaseAuth.instance.currentUser?.displayName ?? '',
+                                rangeValues: _range != null
+                                    ? RangeValues(
+                                        _range!.startDate!.millisecondsSinceEpoch.toDouble(),
+                                        _range!.endDate!.millisecondsSinceEpoch.toDouble(),
+                                      )
+                                    : null,
+                                customerId: FirebaseAuth.instance.currentUser?.uid,
+                                status: OrderStatus.pending,
+                                orderId: '',
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Product Booked Successfully'),
-                          ),
-                        );
-                        Navigator.of(context).pop();
-                      } else if (state is BookProductFailure) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(state.errorMessage),
+                            content: Text('Please select a date range'),
                           ),
                         );
                       }
                     },
-                    builder: (context, state) {
-                      if (state is BookProductInProgress) {
-                        return const CircularProgressIndicator();
-                      }
-                      return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xffFFD700),
-                        ),
-                        onPressed: () {
-                          if (_range != null && _range!.startDate != null && _range!.endDate != null) {
-                            productBloc.add(
-                              BookProduct(
-                                order: OrderModel(
-                                  orderDate: DateTime.now(),
-                                  item: widget.item,
-                                  quantity: quantity,
-                                  totalAmount: widget.item.price * quantity,
-                                  customerName: FirebaseAuth.instance.currentUser?.displayName ?? '',
-                                  rangeValues: _range != null
-                                      ? RangeValues(
-                                          _range!.startDate!.millisecondsSinceEpoch.toDouble(),
-                                          _range!.endDate!.millisecondsSinceEpoch.toDouble(),
-                                        )
-                                      : null,
-                                  customerId: FirebaseAuth.instance.currentUser?.uid,
-                                  status: OrderStatus.pending,
-                                  orderId: '',
-                                ),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Please select a date range'),
-                              ),
-                            );
-                          }
-                        },
-                        child: const Text(
-                          'Book Now',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                      );
-                    },
+                    child: const Text(
+                      'Continue',
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ],
               ),
