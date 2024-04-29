@@ -21,8 +21,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   @override
   void initState() {
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      if (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
+      await FirebaseAuth.instance.currentUser!.reload();
+      if (FirebaseAuth.instance.currentUser!.emailVerified) {
         timer.cancel();
         Get.to(() => const Homebar());
       }
