@@ -1,6 +1,7 @@
 import 'package:ekra/features/personalization/models/user_model.dart';
 import 'package:ekra/features/shop/bloc/product_bloc.dart';
 import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
+import 'package:ekra/widgets/user_products_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -81,38 +82,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             ),
             const SizedBox(height: 10),
             Expanded(
-              child: BlocBuilder<ProductBloc, ProductState>(
-                builder: (context, state) {
-                  if (state is GetProductOfSpecificUserInProgress) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is GetProductOfSpecificUserSuccess) {
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.products.length,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        mainAxisExtent: 293,
-                      ),
-                      itemBuilder: (context, index) {
-                        final product = state.products[index];
-                        return ProductCard(
-                          item: product,
-                        );
-                      },
-                    );
-                  } else if (state is GetProductOfSpecificUserFailure) {
-                    return Center(
-                      child: Text(state.errorMessage),
-                    );
-                  }
-                  return const SizedBox();
-                },
-              ),
+              child: UserProductsList(),
             ),
           ],
         ),

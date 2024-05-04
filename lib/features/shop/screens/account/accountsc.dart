@@ -1,21 +1,40 @@
+import 'package:ekra/features/Authentication/bloc/auth_bloc.dart';
 import 'package:ekra/features/Authentication/screens/login/signin.dart';
+import 'package:ekra/features/shop/bloc/product_bloc.dart';
 import 'package:ekra/features/shop/controllers/product_controller.dart';
-import 'package:ekra/features/shop/models/product_model.dart';
 import 'package:ekra/features/shop/screens/account/settings.dart';
 import 'package:ekra/features/shop/screens/home/notifications.dart';
+import 'package:ekra/widgets/user_products_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
-class AccountScreen extends StatelessWidget {
+class AccountScreen extends StatefulWidget {
   const AccountScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.find<ProductController>();
-    final ProductModel item;
+  State<AccountScreen> createState() => _AccountScreenState();
+}
 
+class _AccountScreenState extends State<AccountScreen> {
+  final controller = Get.find<ProductController>();
+  // final ProductModel item;
+
+  late final ProductBloc productBloc;
+  @override
+  void initState() {
+    productBloc = context.read<ProductBloc>();
+    if (FirebaseAuth.instance.currentUser != null) {
+      productBloc.add(GetProductOfSpecificUser(userId: FirebaseAuth.instance.currentUser!.uid));
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AuthBloc authBloc = context.watch<AuthBloc>();
     return Scaffold(
       body: Stack(
         children: [
@@ -68,34 +87,37 @@ class AccountScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-              top: 14.h,
-              left: 5.w,
-              right: 5.w,
-              child: const Column(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.white,
+            top: 14.h,
+            left: 5.w,
+            right: 5.w,
+            child: Column(
+              children: [
+                const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  radius: 60,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.black54,
                     radius: 60,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.black54,
-                      radius: 60,
-                      child: Icon(
-                        Icons.person,
-                        size: 50,
-                        color: Color(0xffCCCCCC),
-                      ),
+                    child: Icon(
+                      Icons.person,
+                      size: 50,
+                      color: Color(0xffCCCCCC),
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  authBloc.user?.fullName ?? '',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.black54,
                   ),
-                  Text("account name",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black54,
-                      ))
-                ],
-              )),
+                )
+              ],
+            ),
+          ),
           Positioned(
             right: 12.w,
             top: 33.h,
@@ -178,27 +200,29 @@ class AccountScreen extends StatelessWidget {
               top: 45.h,
               left: 5.w,
               right: 5.w,
-              child: SingleChildScrollView(
-                child: ListView.builder(
-                  itemCount: controller.featuredProducts.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: Colors.black54,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              bottom: 8,
+              child: const UserProductsList(),
+              // child: SingleChildScrollView(
+              //   child: ListView.builder(
+              //     itemCount: controller.featuredProducts.length,
+              //     shrinkWrap: true,
+              //     itemBuilder: (BuildContext context, int index) {
+              //       return Padding(
+              //         padding: const EdgeInsets.all(15),
+              //         child: InkWell(
+              //           onTap: () {},
+              //           child: Container(
+              //             height: 200,
+              //             decoration: BoxDecoration(
+              //               color: Colors.black54,
+              //               borderRadius: BorderRadius.circular(15),
+              //             ),
+              //           ),
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
             )
           else ...[
             Align(
