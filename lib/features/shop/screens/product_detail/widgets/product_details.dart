@@ -39,7 +39,7 @@ class ProductDetails extends StatelessWidget {
                 color: Color(0xffFEBD59),
               ),
               const Text(
-                "4.3",
+                "0.0",
                 style: TextStyle(
                   color: Color(0xff5A5A5A),
                   fontSize: 16,

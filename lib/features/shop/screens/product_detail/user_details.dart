@@ -4,6 +4,7 @@ import 'package:ekra/features/shop/screens/home/widgets/productcard.dart';
 import 'package:ekra/widgets/user_products_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sizer/sizer.dart';
 
 class UserDetailsScreen extends StatefulWidget {
   const UserDetailsScreen({
@@ -34,7 +35,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         backgroundColor: Colors.grey[100],
-        title: Text(widget.user.fullName ?? 'User Details'),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -51,22 +51,91 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
             const SizedBox(
               height: 16,
             ),
-            Row(
+            Center(
+              child: Positioned(
+                top: 14.h,
+                left: 5.w,
+                right: 5.w,
+                child: Column(
+                  children: [
+                    const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 60,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.black54,
+                        radius: 60,
+                        child: Icon(
+                          Icons.person,
+                          size: 50,
+                          color: Color(0xffCCCCCC),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      widget.user.fullName ?? 'User Details',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        color: Colors.black54,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            const Row(
               children: [
-                const Text('Email'),
-                const Spacer(),
-                Text(widget.user.email ?? ''),
+                Column(
+                  children: [
+                    Icon(
+                      Icons.message,
+                      color: Color(0xFF2C3B58),
+                      size: 32,
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "Message",
+                      style: TextStyle(
+                        color: Color(0xff5A5A5A),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: 230,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Color(0xffFEBD59),
+                          size: 32,
+                        ),
+                        Text(
+                          "Review",
+                          style: TextStyle(
+                            color: Color(0xff5A5A5A),
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text(
+                      "0.0",
+                      style: TextStyle(
+                        color: Color(0xff5A5A5A),
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
-            if (widget.user.phoneNumber != null && widget.user.phoneNumber!.isNotEmpty) const SizedBox(height: 10),
-            if (widget.user.phoneNumber != null && widget.user.phoneNumber!.isNotEmpty)
-              Row(
-                children: [
-                  const Text('Phone'),
-                  const Spacer(),
-                  Text(widget.user.phoneNumber ?? ''),
-                ],
-              ),
             const SizedBox(height: 10),
             const Divider(
               color: Color(0xffE5E5E5),
@@ -81,7 +150,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            Expanded(
+            const Expanded(
               child: UserProductsList(),
             ),
           ],

@@ -68,7 +68,7 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const Icon(
                 Icons.notifications,
                 size: 32,
-                color: Colors.black54,
+                color:  Color(0xFF2C3B58),
               ),
             ),
           ),
@@ -82,7 +82,7 @@ class _AccountScreenState extends State<AccountScreen> {
               child: const Icon(
                 Icons.settings,
                 size: 32,
-                color: Colors.black54,
+                color:  Color(0xFF2C3B58),
               ),
             ),
           ),
@@ -125,7 +125,7 @@ class _AccountScreenState extends State<AccountScreen> {
               children: [
                 Icon(
                   Icons.star,
-                  color: Colors.black54,
+                  color:Color(0xffFEBD59),
                   size: 32,
                 ),
                 SizedBox(width: 4),
@@ -157,7 +157,7 @@ class _AccountScreenState extends State<AccountScreen> {
                 children: [
                   Icon(
                     Icons.message,
-                    color: Colors.black54,
+                    color:  Color(0xFF2C3B58),
                     size: 32,
                   ),
                   SizedBox(width: 4),
@@ -193,11 +193,16 @@ class _AccountScreenState extends State<AccountScreen> {
                       fontSize: 14,
                     ),
                   ),
+                     Divider(
+              color: Color(0xffE5E5E5),
+            ),
                 ],
               )),
+              
+              
           if (FirebaseAuth.instance.currentUser != null)
             Positioned(
-              top: 45.h,
+              top: 48.h,
               left: 5.w,
               right: 5.w,
               bottom: 8,

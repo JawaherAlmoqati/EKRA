@@ -22,7 +22,7 @@ class OrderTile extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: Colors.grey[300],
           borderRadius: BorderRadius.circular(15),
         ),
         margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -39,7 +39,8 @@ class OrderTile extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-            if (order.item!.images != null && order.item!.images!.isNotEmpty) const SizedBox(width: 10),
+            if (order.item!.images != null && order.item!.images!.isNotEmpty)
+              const SizedBox(width: 10),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -58,9 +59,12 @@ class OrderTile extends StatelessWidget {
                         ),
                         const Spacer(),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 2),
                           decoration: BoxDecoration(
-                            color: isPending ? const Color(0xffFFD700) : Colors.green,
+                            color: isPending
+                                ? const Color(0xffFFD700)
+                                : Colors.green,
                             borderRadius: BorderRadius.circular(99),
                           ),
                           child: Text(
@@ -102,8 +106,10 @@ class OrderTile extends StatelessWidget {
                       BlocConsumer<ProductBloc, ProductState>(
                         listener: (context, state) {
                           if (state is UpdateOrderStatusSuccess) {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Text('Order status updated successfully'),
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content:
+                                  Text('Order status updated successfully'),
                             ));
                           }
                           if (state is UpdateOrderStatusFailure) {
@@ -122,7 +128,8 @@ class OrderTile extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.red),
                                 ),
                                 onPressed: () {
                                   confirmActionPopup(
@@ -139,12 +146,14 @@ class OrderTile extends StatelessWidget {
                                     },
                                   );
                                 },
-                                child: const Text('Reject', style: TextStyle(color: Colors.white)),
+                                child: const Text('Reject',
+                                    style: TextStyle(color: Colors.white)),
                               ),
                               const Spacer(),
                               ElevatedButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Colors.green),
+                                  backgroundColor:
+                                      MaterialStateProperty.all(Colors.green),
                                 ),
                                 onPressed: () {
                                   confirmActionPopup(
@@ -161,7 +170,8 @@ class OrderTile extends StatelessWidget {
                                     },
                                   );
                                 },
-                                child: const Text('Accept', style: TextStyle(color: Colors.white)),
+                                child: const Text('Accept',
+                                    style: TextStyle(color: Colors.white)),
                               ),
                             ],
                           );
@@ -178,7 +188,8 @@ class OrderTile extends StatelessWidget {
     );
   }
 
-  confirmActionPopup(BuildContext context, String title, String message, Function onConfirm) {
+  confirmActionPopup(
+      BuildContext context, String title, String message, Function onConfirm) {
     showDialog(
       context: context,
       builder: (context) {

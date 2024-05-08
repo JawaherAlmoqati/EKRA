@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
+
 
 
 class settingsscreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class settingsscreen extends StatefulWidget {
            style: TextStyle(
             fontSize: 15,
             color:Colors.grey.shade600)),
-            SizedBox(height: 7,),
+            const SizedBox(height: 7,),
            Column(
             children: List.generate(
               settings.length,
@@ -63,7 +63,7 @@ class settingsscreen extends StatefulWidget {
            style: TextStyle(
             fontSize: 15,
             color:Colors.grey.shade600)),
-            SizedBox(height: 7,),
+            const SizedBox(height: 7,),
             SettingSwitch(
                 title: "Notification",
                 icon: Icons.notifications,
@@ -96,7 +96,7 @@ class settingsscreen extends StatefulWidget {
            style: TextStyle(
             fontSize: 15,
             color:Colors.grey.shade600)),
-            SizedBox(height: 7,),
+            const SizedBox(height: 7,),
            Column(
             children: List.generate(
               settings3.length,
@@ -109,7 +109,7 @@ class settingsscreen extends StatefulWidget {
            style: TextStyle(
             fontSize: 15,
             color:Colors.grey.shade600)),
-            SizedBox(height: 7,),
+            const SizedBox(height: 7,),
             if (FirebaseAuth.instance.currentUser != null)
             GestureDetector(
               onTap: () {
@@ -122,15 +122,15 @@ class settingsscreen extends StatefulWidget {
                 width: 50,
                 margin: const EdgeInsets.only(bottom:10 ),
                 decoration: BoxDecoration(
-                  color: Color(0xffF1F2F7),
+                  color: const Color(0xffF1F2F7),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Icon(Icons.logout,color: Color.fromARGB(255, 47, 46, 46),),
+                child: const Icon(Icons.logout,color: Color.fromARGB(255, 47, 46, 46),),
                 ),
                 const SizedBox(width:10 ,),
-                  Text(
+                  const Text(
                   "Log Out",
-                  style: const TextStyle(
+                  style: TextStyle(
                   color: Color.fromARGB(255, 47, 46, 46),
                   fontSize:15,
                   fontWeight: FontWeight.bold

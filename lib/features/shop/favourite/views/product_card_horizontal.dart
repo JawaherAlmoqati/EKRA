@@ -31,7 +31,7 @@ class ProductCardHorizontal extends StatelessWidget {
         padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
+          color: Colors.grey[300],
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +79,8 @@ class ProductCardHorizontal extends StatelessWidget {
                             builder: (context) {
                               return AlertDialog.adaptive(
                                 title: const Text('Remove from Favourite'),
-                                content: const Text('Are you sure you want to remove this item from your favourite list?'),
+                                content: const Text(
+                                    'Are you sure you want to remove this item from your favourite list?'),
                                 actions: [
                                   CupertinoDialogAction(
                                     onPressed: () {
@@ -90,7 +91,8 @@ class ProductCardHorizontal extends StatelessWidget {
                                   CupertinoDialogAction(
                                     isDestructiveAction: true,
                                     onPressed: () {
-                                      favouriteBloc.add(RemoveFromFavourite(product.id));
+                                      favouriteBloc
+                                          .add(RemoveFromFavourite(product.id));
                                       Navigator.of(context).pop();
                                     },
                                     child: const Text('Remove'),
@@ -137,9 +139,12 @@ class ProductCardHorizontal extends StatelessWidget {
                         height: 25,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFFFEBD59)),
-                            foregroundColor: MaterialStateProperty.all<Color>(const Color(0xFF333333)),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFFFEBD59)),
+                            foregroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFF333333)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(16.0),
                               ),
